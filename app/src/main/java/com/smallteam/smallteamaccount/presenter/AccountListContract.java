@@ -23,7 +23,7 @@ import okhttp3.RequestBody;
 
 public interface AccountListContract {
     interface AccountListView extends BaseView {
-        void getListSuccess();
+        void getListSuccess(NormalBean value);
     }
 
     class AccountListPresenter extends BasePresenter<AccountListView> {
@@ -47,7 +47,7 @@ public interface AccountListContract {
                 .observeOn(AndroidSchedulers.mainThread()).subscribeWith(new HttpObserver<NormalBean>(mContext, mAccountListView, true) {
                     @Override
                     protected void call(NormalBean value) {
-                        mView.getListSuccess();
+                        mView.getListSuccess(value);
                     }
                 });
             addObservable(httpObserver);

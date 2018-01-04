@@ -12,6 +12,10 @@ import retrofit2.http.POST;
  */
 
 public interface ApiService {
+
     @POST("mock/5a41adb2b80e3f3080db1dd6/app/login/login")
     Observable<NormalBean> test(@Body RequestBody body);
+
+    @POST("userController/verifyCode")
+    Observable<NormalBean> niaBieLV(@Body RequestBody body);
 }

@@ -1,21 +1,18 @@
 package com.smallteam.smallteamaccount.ui.fragment;
 
 import android.graphics.Rect;
-import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.smallteam.smallteamaccount.R;
 import com.smallteam.smallteamaccount.adapter.AccountAdapter;
 import com.smallteam.smallteamaccount.base.MVPBaseFragment;
 import com.smallteam.smallteamaccount.base.SmallTeamApp;
+import com.smallteam.smallteamaccount.bean.NormalBean;
 import com.smallteam.smallteamaccount.presenter.AccountListContract;
-import com.smallteam.smallteamaccount.ui.activity.MainActivity;
 import com.smallteam.smallteamaccount.utils.EasyToast;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenu;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuBridge;
@@ -25,8 +22,6 @@ import com.yanzhenjie.recyclerview.swipe.SwipeMenuItemClickListener;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * Created by Administrator on 2018/1/4.
@@ -115,7 +110,7 @@ public class AccountListFragment extends MVPBaseFragment<AccountListContract.Acc
     }
 
     @Override
-    public void getListSuccess() {
+    public void getListSuccess(NormalBean value) {
         mAccountRefresh.setRefreshing(false);
     }
 }
