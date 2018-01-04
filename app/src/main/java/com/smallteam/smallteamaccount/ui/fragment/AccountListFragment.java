@@ -79,7 +79,7 @@ public class AccountListFragment extends MVPBaseFragment<AccountListContract.Acc
             int menuPosition = menuBridge.getPosition(); // 菜单在RecyclerView的Item中的Position。
 
             if (direction == SwipeMenuRecyclerView.RIGHT_DIRECTION) {
-
+                EasyToast.showShort(SmallTeamApp.getInstance(), "删除");
             } else if (direction == SwipeMenuRecyclerView.LEFT_DIRECTION) {
                 EasyToast.showShort(SmallTeamApp.getInstance(), "list第" + adapterPosition + "; 左侧菜单第" + menuPosition);
             }
@@ -89,7 +89,7 @@ public class AccountListFragment extends MVPBaseFragment<AccountListContract.Acc
     private SwipeMenuCreator mSwipeMenuCreator = new SwipeMenuCreator() {
         @Override
         public void onCreateMenu(SwipeMenu swipeLeftMenu, SwipeMenu swipeRightMenu, int viewType) {
-            int width = getResources().getDimensionPixelSize(R.dimen.bottom_bar_height);
+            int width = getResources().getDimensionPixelSize(R.dimen.top_bar_height);
 
             // 1. MATCH_PARENT 自适应高度，保持和Item一样高;
             // 2. 指定具体的高，比如80;
