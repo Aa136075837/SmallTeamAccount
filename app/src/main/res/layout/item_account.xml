@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="345dp"
+    android:layout_height="120dp"
+    android:background="@drawable/item_bg"
+    android:minHeight="90dp"
+    android:paddingRight="4dp">
+
+    <View
+        android:id="@+id/item_left_view"
+        android:layout_width="5dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/item_left_blue" />
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/item_left_view">
+
+        <TextView
+            android:id="@+id/item_payer"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="XXX"
+            android:textSize="16sp"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/item_date"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="2017-12-25"
+            android:textSize="16sp"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/item_money"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="35.23"
+            android:textSize="16sp"
+            android:textColor="@color/text_blue_color" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/item_parts"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/ll"
+        android:layout_marginLeft="10dp"
+        android:gravity="center_vertical"
+        android:text="XXX,XXX,XXX,XXX,XXX"
+        android:textColor="@color/text_title_color"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/item_remakes"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/item_parts"
+        android:layout_marginLeft="10dp"
+        android:gravity="center_vertical"
+        android:text="XXXXXXXXXX "
+        android:textColor="@color/text_title_color"
+        android:textSize="16sp" />
+</RelativeLayout>

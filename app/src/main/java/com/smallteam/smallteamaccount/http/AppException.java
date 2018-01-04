@@ -4,6 +4,8 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import com.smallteam.smallteamaccount.utils.EasyToast;
+
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
@@ -28,7 +30,7 @@ public class AppException {
 
     private static void loadError(Context context, String msg) {
         if (!TextUtils.isEmpty(msg)) {
-            Observable.just(msg).observeOn(AndroidSchedulers.mainThread()).subscribe(s -> Toast.makeText(context, s, Toast.LENGTH_SHORT).show());
+            Observable.just(msg).observeOn(AndroidSchedulers.mainThread()).subscribe(s -> EasyToast.showShort(context, msg));
         }
     }
 

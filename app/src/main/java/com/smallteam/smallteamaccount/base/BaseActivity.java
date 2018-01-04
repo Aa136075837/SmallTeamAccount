@@ -1,6 +1,9 @@
 package com.smallteam.smallteamaccount.base;
 
 import android.content.Intent;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -15,6 +18,8 @@ public class BaseActivity extends AppCompatActivity implements BaseView {
 
     private CompositeDisposable mCompositeDisposable;
     private ProgressDialogUtils mProgressBar = null;
+    private FragmentManager mFragmentManager;
+    private Fragment mCurrentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,16 +57,40 @@ public class BaseActivity extends AppCompatActivity implements BaseView {
         unSubscribe();
     }
 
-    protected void toTargetAcvitity(Class<?> target) {
+    protected void startAcvitity(Class<?> target) {
         startActivity(new Intent(this, target));
     }
 
-    protected void toTargetAcvitity(Class<?> target, Bundle bundle) {
+    protected void startAcvitity(Class<?> target, Bundle bundle) {
         Intent intent = new Intent(this, target);
         if (bundle != null) {
             intent.putExtras(bundle);
         }
         startActivity(intent);
+    }
+
+    public void onSwitchFragment(BaseFragment fragment, boolean isAddTask) {
+        if (mFragmentManager == null) {
+            mFragmentManager = getSupportFragmentManager();
+        }
+        FragmentTransaction transaction = mFragmentManager.beginTransaction();
+        if (mCurrentFragment != null) {
+            transaction.hide(mCurrentFragment);
+        }
+        if (mFragmentManager.findFragmentByTag(fragment.getClass().getName()) == null && !fragment.isAdded()) {
+            transaction.add(R.id.fragment_main, fragment, fragment.getClass().getName());
+        } else {
+            transaction.show(fragment);
+        }
+        if (isAddTask) {
+            transaction.addToBackStack(null);
+        }
+        mCurrentFragment = fragment;
+        transaction.commitAllowingStateLoss();
+    }
+
+    public void onSwitchFragment(BaseFragment fragment) {
+        onSwitchFragment(fragment, false);
     }
 
     @Override

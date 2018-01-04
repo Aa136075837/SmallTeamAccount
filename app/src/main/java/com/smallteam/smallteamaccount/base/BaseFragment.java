@@ -9,12 +9,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.smallteam.smallteamaccount.ui.view.ProgressDialogUtils;
+import com.smallteam.smallteamaccount.utils.L;
+
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+
 /**
  * Created by bo on 2018/1/3.
  */
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment implements BaseView {
 
     private static final String STATE_SAVE_IS_HIDDEN = "STATE_SAVE_IS_HIDDEN";
+    private CompositeDisposable mCompositeDisposable;
+    private ProgressDialogUtils mProgressBar = null;
+    private Unbinder mUnbinder;
+    /**
+     * 是否显示
+     */
+    protected boolean isVisible;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,12 +60,78 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = LayoutInflater.from(SmallTeamApp.getInstance()).inflate(getLayoutResId(), null);
+        View view = LayoutInflater.from(SmallTeamApp.getInstance()).inflate(getLayoutResId(), container, false);
+        mUnbinder = ButterKnife.bind(this, view);
         return view;
+    }
+
+    private CompositeDisposable getCompositeDisposable() {
+        if (mCompositeDisposable == null) {
+            mCompositeDisposable = new CompositeDisposable();
+        }
+        return mCompositeDisposable;
+    }
+
+    private void unSubscribe() {
+        if (mCompositeDisposable == null) {
+            mCompositeDisposable = getCompositeDisposable();
+        }
+        mCompositeDisposable.clear();
+    }
+
+    protected void addObservable(Disposable d) {
+        try {
+            if (mCompositeDisposable == null) {
+                mCompositeDisposable = getCompositeDisposable();
+            }
+            mCompositeDisposable.add(d);
+        } catch (Exception e) {
+            L.e("BaseFragment RX 添加异常 ：：" + e.toString());
+        }
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        isVisible = !hidden;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (mUnbinder != null) {
+            mUnbinder.unbind();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        unSubscribe();
     }
 
     protected abstract @LayoutRes
     int getLayoutResId();
 
+    @Override
+    public void showProgress() {
+        mProgressBar = ProgressDialogUtils.getInstance(getActivity())
+            .setCancelAble(false)
+            .setCanceledOutside(false)
+            .showProgress();
+    }
 
+    @Override
+    public void loadError() {
+        if (mProgressBar != null) {
+            mProgressBar.dismiss();
+        }
+    }
+
+    @Override
+    public void loadFinish() {
+        if (mProgressBar != null) {
+            mProgressBar.dismiss();
+        }
+    }
 }

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.smallteam.smallteamaccount.ui.activity.MainActivity"
     tools:showIn="@layout/app_bar_main">
@@ -11,6 +12,21 @@
     <FrameLayout
         android:id="@+id/fragment_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
 
-</android.support.constraint.ConstraintLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/text_gray_color" />
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bnv_main"
+        android:layout_width="match_parent"
+        android:background="@color/alpha_text_gray_color"
+        android:layout_height="@dimen/bottom_bar_height"
+        app:itemIconTint="@color/bnv_color_selector"
+        app:itemTextColor="@color/bnv_color_selector"
+        app:menu="@menu/bnv_menu_main" />
+
+</LinearLayout>

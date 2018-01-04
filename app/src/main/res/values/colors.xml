@@ -10,6 +10,7 @@
     <color name="app_theme_color">#FF7700</color>
     <color name="black">#000</color>
     <color name="text_gray_color">#c9caca</color>
+    <color name="alpha_text_gray_color">#33c9caca</color>
     <color name="text_blue_color">#0389ff</color>
     <color name="text_title_color">#3e3a39</color>
 

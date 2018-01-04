@@ -6,4 +6,7 @@
 
     <string name="action_settings">Settings</string>
     <string name="loading">加载中……</string>
+    <string name="account_list">账单列表</string>
+    <string name="add_account">添加账单</string>
+    <string name="user_balance">个人收支</string>
 </resources>
