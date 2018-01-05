@@ -4,15 +4,15 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/account_list"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/data_list"
             android:title="账单" />
         <item
             android:id="@+id/account_balance"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/account_fill"
             android:title="收支" />
         <item
             android:id="@+id/account_add"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/addition_fill"
             android:title="添加" />
     </group>
 </menu>

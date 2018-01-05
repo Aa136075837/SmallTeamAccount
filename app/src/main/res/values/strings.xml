@@ -9,4 +9,6 @@
     <string name="account_list">账单列表</string>
     <string name="add_account">添加账单</string>
     <string name="user_balance">个人收支</string>
+
+    <string name="login_out">退出</string>
 </resources>

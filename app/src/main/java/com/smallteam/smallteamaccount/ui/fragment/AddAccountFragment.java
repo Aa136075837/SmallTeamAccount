@@ -28,7 +28,7 @@ public class AddAccountFragment extends MVPBaseFragment<AddAccountContract.AddAc
 
     @Override
     protected void initEvents() {
-        mPresenter.sendCode("86", "17620480466");
+//        mPresenter.sendCode("86", "17620480466");
 
         mSendCode.setOnClickListener(view -> {
             RequestBody body = new FormBody.Builder()
