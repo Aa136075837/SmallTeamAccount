@@ -97,7 +97,6 @@ public class MainActivity extends MVPBaseActivity<MainContract.MainPresenter>
         mFab.setOnClickListener(view -> {
             mPresenter.test();
         });
-
     }
 
     @Override

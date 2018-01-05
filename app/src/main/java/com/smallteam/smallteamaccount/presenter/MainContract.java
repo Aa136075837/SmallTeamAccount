@@ -39,12 +39,8 @@ public interface MainContract {
                 .add("password", "asdd45645")
                 .add("phone", "14785203693")
                 .build();
-            HttpObserver<NormalBean> httpObserver = Observable.zip(Load.createApi().test(body), Observable.timer(3, TimeUnit.SECONDS), new BiFunction<NormalBean, Long, NormalBean>() {
-                @Override
-                public NormalBean apply(NormalBean normalBean, Long aLong) throws Exception {
-                    return normalBean;
-                }
-            }).subscribeOn(Schedulers.io())
+            HttpObserver<NormalBean> httpObserver = Observable.zip(Load.createApi().test(body), Observable.timer(3, TimeUnit.SECONDS),
+                (normalBean, aLong) -> normalBean).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribeWith(new HttpObserver<NormalBean>(mContext, mMainView, true) {
                     @Override
                     protected void call(NormalBean value) {

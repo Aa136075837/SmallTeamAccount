@@ -30,6 +30,13 @@ public class EasyToast {
         return mToast;
     }
 
+    /**
+     *  子线程中 显示Toast，默认短时间显示
+     */
+    public static void showInThread(Context context, String msg) {
+        showInThread(context, msg, Toast.LENGTH_SHORT);
+    }
+
     public static void showInThread(Context context, String msg, @Length int length) {
         new Thread() {
             @Override

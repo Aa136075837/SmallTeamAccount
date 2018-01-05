@@ -25,30 +25,36 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:drawableLeft="@drawable/icon_user_orange"
+            android:drawablePadding="8dp"
             android:gravity="center_vertical"
             android:text="XXX"
-            android:textSize="16sp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/item_date"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:drawableLeft="@drawable/icon_date_orange"
+            android:drawablePadding="8dp"
             android:gravity="center_vertical"
             android:text="2017-12-25"
-            android:textSize="16sp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/item_money"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
+            android:layout_weight="0.8"
+            android:drawableLeft="@drawable/icon_money_orange"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
             android:text="35.23"
-            android:textSize="16sp"
-            android:textColor="@color/text_blue_color" />
+            android:textColor="@color/text_blue_color"
+            android:textSize="16sp" />
     </LinearLayout>
 
     <TextView
@@ -57,6 +63,8 @@
         android:layout_height="40dp"
         android:layout_below="@+id/ll"
         android:layout_marginLeft="10dp"
+        android:drawableLeft="@drawable/group_red"
+        android:drawablePadding="8dp"
         android:gravity="center_vertical"
         android:text="XXX,XXX,XXX,XXX,XXX"
         android:textColor="@color/text_title_color"
@@ -68,6 +76,8 @@
         android:layout_height="40dp"
         android:layout_below="@+id/item_parts"
         android:layout_marginLeft="10dp"
+        android:drawableLeft="@drawable/icon_desc_orange"
+        android:drawablePadding="8dp"
         android:gravity="center_vertical"
         android:text="XXXXXXXXXX "
         android:textColor="@color/text_title_color"
