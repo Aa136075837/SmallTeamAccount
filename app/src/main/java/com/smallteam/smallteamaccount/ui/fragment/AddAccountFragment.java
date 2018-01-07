@@ -28,11 +28,11 @@ public class AddAccountFragment extends MVPBaseFragment<AddAccountContract.AddAc
 
     @Override
     protected void initEvents() {
-//        mPresenter.sendCode("86", "17620480466");
+        mPresenter.sendCode("86", "17688163211");
 
         mSendCode.setOnClickListener(view -> {
             RequestBody body = new FormBody.Builder()
-                    .add("phoneNum", "17620480466")
+                    .add("phoneNum", "17688163211")
                     .add("code", mTestEt.getText().toString().trim()).build();
             HttpObserver<NormalBean> httpObserver = Load.createApi().niaBieLV(body).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                     .subscribeWith(new HttpObserver<NormalBean>(getActivity()) {
