@@ -17,4 +17,6 @@
     <string name="group_account">集体账单</string>
     <string name="setting">设置</string>
     <string name="ee">私人账单</string>
+    <string name="most_expensive_account">最贵交易</string>
+    <string name="pay_cumulative">收支累计</string>
 </resources>
