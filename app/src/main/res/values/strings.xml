@@ -17,4 +17,18 @@
     <string name="group_account">集体账单</string>
     <string name="setting">设置</string>
     <string name="ee">私人账单</string>
+
+
+
+    <string name="login">登录</string>
+    <string name="Username">手机号码</string>
+    <string name="Password">验证码</string>
+    <string name="forgot_your_password">忘记密码</string>
+    <string name="go">GO</string>
+    <string name="repeat_password">再次输入密码</string>
+    <string name="next">下一步</string>
+    <string name="register">注册</string>
+    <string name="send_verify_code">获取验证码</string>
+    <string name="toast_username_not_null">手机号不能为空！</string>
+    <string name="toast_verify_code_not_null">验证码不能为空！</string>
 </resources>

@@ -18,4 +18,6 @@ public interface ApiService {
 
     @POST("userController/verifyCode")
     Observable<NormalBean> niaBieLV(@Body RequestBody body);
+    @POST("/login")
+    Observable<NormalBean> login(@Body RequestBody body);
 }

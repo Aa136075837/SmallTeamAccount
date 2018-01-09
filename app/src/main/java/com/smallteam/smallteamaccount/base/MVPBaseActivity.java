@@ -2,6 +2,7 @@ package com.smallteam.smallteamaccount.base;
 
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
+import butterknife.ButterKnife;
 
 public abstract class MVPBaseActivity<P extends AbBasePresenter> extends BaseActivity {
     protected P mPresenter;
@@ -34,6 +35,7 @@ public abstract class MVPBaseActivity<P extends AbBasePresenter> extends BaseAct
         super.onCreate(savedInstanceState);
         Bundle bundle = getIntent().getExtras();
         setContentView(initLayout());
+        ButterKnife.bind (this);
         mPresenter = createPresenter();
         initParams(bundle);
         initViews();
