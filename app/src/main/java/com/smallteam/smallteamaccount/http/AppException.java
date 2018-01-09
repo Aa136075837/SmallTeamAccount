@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.smallteam.smallteamaccount.utils.EasyToast;
+import com.smallteam.smallteamaccount.utils.L;
 
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
@@ -30,17 +31,20 @@ public class AppException {
 
     private static void loadError(Context context, String msg) {
         if (!TextUtils.isEmpty(msg)) {
-            Observable.just(msg).observeOn(AndroidSchedulers.mainThread()).subscribe(s -> EasyToast.showShort(context, msg));
+            Observable.just(msg).observeOn(AndroidSchedulers.mainThread()).subscribe(s -> {
+                EasyToast.showShort(context, msg);
+                L.e(msg);
+            });
         }
     }
 
     public static void handleException(Context context, Throwable e) {
         if (e instanceof UnknownHostException || e instanceof ConnectException) {
-            loadError(context, NET_WORK_ERROE_MSG);
+            loadError(context, NET_WORK_ERROE_MSG + ":" + e.toString());
         } else if (e instanceof ServiceException) {
-            loadError(context, ((ServiceException) e).getMsg());
+            loadError(context, ((ServiceException) e).getMsg() + ":" + e.toString());
         } else if (e instanceof SocketTimeoutException) {
-            loadError(context, NET_TIME_OUT_MSG);
+            loadError(context, NET_TIME_OUT_MSG + ":" + e.toString());
         }
     }
 }

@@ -31,4 +31,16 @@
     <string name="send_verify_code">获取验证码</string>
     <string name="toast_username_not_null">手机号不能为空！</string>
     <string name="toast_verify_code_not_null">验证码不能为空！</string>
+    <string name="most_expensive_account">最贵交易</string>
+    <string name="pay_cumulative">收支累计</string>
+    <string name="ok">ok</string>
+    <string name="whole_parts_name">全部</string>
+    <string name="participants">参与人</string>
+    <string name="consumption_types">消费类型</string>
+
+    <string name="daily_use">生活用品</string>
+    <string name="stay_hotel">住店</string>
+    <string name="travel">出行</string>
+    <string name="entertainment">文化娱乐</string>
+    <string name="other">其他</string>
 </resources>

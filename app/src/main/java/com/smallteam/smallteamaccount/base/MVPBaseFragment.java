@@ -13,11 +13,11 @@ public abstract class MVPBaseFragment<P extends BasePresenter> extends BaseFragm
 
     protected P mPresenter;
 
-    protected abstract void initEvents();
+    protected abstract P createPresenter();
 
     protected abstract void initViews();
 
-    protected abstract P createPresenter();
+    protected abstract void initEvents();
 
     @Nullable
     @Override
