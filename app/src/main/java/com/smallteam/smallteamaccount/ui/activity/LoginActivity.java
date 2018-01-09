@@ -48,6 +48,7 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.LoginPresenter>
             EasyToast.showShort (this,R.string.toast_verify_code_not_null);
            return;
         }
+
         //mPresenter.login ();
         //startAcvitity (MainActivity.class);
         //finish ();
