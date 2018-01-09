@@ -1,10 +1,14 @@
 package com.smallteam.smallteamaccount.http.api;
 
 import com.smallteam.smallteamaccount.bean.NormalBean;
+import com.smallteam.smallteamaccount.bean.ServerResultBean;
+import com.smallteam.smallteamaccount.bean.UserBean;
 
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
 /**
@@ -18,6 +22,8 @@ public interface ApiService {
 
     @POST("userController/loginPhone")
     Observable<NormalBean> niaBieLV(@Body RequestBody body);
-    @POST("/login")
-    Observable<NormalBean> login(@Body RequestBody body);
+
+    @FormUrlEncoded
+    @POST("accountController/loginPhone")
+    Observable<ServerResultBean<UserBean>> login(@Field("phoneNum") String phoneNum, @Field("code") String code);
 }

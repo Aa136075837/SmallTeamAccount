@@ -44,7 +44,7 @@ public abstract class HttpObserver<T> extends DisposableObserver<T> {
             mView.loadFinish();
         }
         if (value == null) {
-            onError(new ServiceException(AppException.SERVICE_ERROR, AppException.SERVICE_ERROR_MSG));
+            onError(ServiceException.create(AppException.SERVICE_ERROR, AppException.SERVICE_ERROR_MSG));
         } else {
             call(value);
         }
@@ -57,6 +57,9 @@ public abstract class HttpObserver<T> extends DisposableObserver<T> {
 
     @Override
     public void onError(Throwable e) {
+        if (e instanceof ServiceException) {
+
+        }
         if (mView != null) {
             mView.loadError();
         }

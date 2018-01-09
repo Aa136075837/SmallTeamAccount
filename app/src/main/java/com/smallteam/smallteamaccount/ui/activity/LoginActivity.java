@@ -5,6 +5,8 @@ import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
 import butterknife.BindView;
 import com.smallteam.smallteamaccount.R;
 import com.smallteam.smallteamaccount.base.MVPBaseActivity;
@@ -20,6 +22,8 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.LoginPresenter>
     @BindView (R.id.et_password) EditText mEtPassword;
     @BindView (R.id.bt_go) Button mBtGo;
     @BindView (R.id.cv) CardView mCv;
+    @BindView(R.id.tv_login_getCode)
+    TextView getCodeTv;
 
     @Override protected int initLayout () {
         return R.layout.activity_login;
@@ -35,6 +39,16 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.LoginPresenter>
 
     @Override protected void initEvents () {
         mBtGo.setOnClickListener (v -> login ());
+        getCodeTv.setOnClickListener(view -> getCode());
+    }
+
+    private void getCode() {
+        String username = mEtUsername.getText ().toString ().trim ();
+        if(TextUtils.isEmpty (username) ){
+            EasyToast.showShort (this,R.string.toast_username_not_null);
+            return;
+        }
+        mPresenter.getCode(username);
     }
 
     private void login () {
@@ -49,9 +63,7 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.LoginPresenter>
            return;
         }
 
-        //mPresenter.login ();
-        //startAcvitity (MainActivity.class);
-        //finish ();
+        mPresenter.login (username,verifyCode);
     }
 
     @Override protected LoginContract.LoginPresenter createPresenter () {
