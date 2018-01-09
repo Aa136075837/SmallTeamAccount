@@ -14,7 +14,7 @@ import com.smallteam.smallteamaccount.R;
  * Created by Administrator on 2018/1/4.
  */
 
-public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AuditHolder> {
+public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountHolder> {
     private Context mContext;
     private int mResId;
 
@@ -25,13 +25,13 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AuditHol
     }
 
     @Override
-    public AuditHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public AccountHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(mResId, parent, false);
-        return new AuditHolder(view);
+        return new AccountHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(AuditHolder holder, int position) {
+    public void onBindViewHolder(AccountHolder holder, int position) {
         holder.itemView.setTag(position);
         if (position % 2 == 0) {
             holder.mLeftView.setBackground(mContext.getResources().getDrawable(R.drawable.item_left_blue));
@@ -46,7 +46,7 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AuditHol
         return 30;
     }
 
-    static class AuditHolder extends RecyclerView.ViewHolder {
+    static class AccountHolder extends RecyclerView.ViewHolder {
 
         private final View mLeftView;
         private final TextView mPartsTv;
@@ -55,7 +55,7 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AuditHol
         private final TextView mMoney;
         private final TextView mRemakesTv;
 
-        public AuditHolder(View itemView) {
+        public AccountHolder(View itemView) {
             super(itemView);
             mLeftView = itemView.findViewById(R.id.item_left_view);
             mPartsTv = itemView.findViewById(R.id.item_parts);

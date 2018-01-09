@@ -4,8 +4,10 @@ import android.graphics.Rect;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.smallteam.smallteamaccount.R;
 import com.smallteam.smallteamaccount.adapter.AccountAdapter;
@@ -13,6 +15,7 @@ import com.smallteam.smallteamaccount.base.MVPBaseFragment;
 import com.smallteam.smallteamaccount.base.SmallTeamApp;
 import com.smallteam.smallteamaccount.bean.NormalBean;
 import com.smallteam.smallteamaccount.presenter.AccountListContract;
+import com.smallteam.smallteamaccount.ui.view.ScreenPopupWindow;
 import com.smallteam.smallteamaccount.utils.EasyToast;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenu;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuBridge;
@@ -32,6 +35,8 @@ public class AccountListFragment extends MVPBaseFragment<AccountListContract.Acc
     SwipeMenuRecyclerView mAccountRecycle;
     @BindView(R.id.account_refresh)
     SwipeRefreshLayout mAccountRefresh;
+    @BindView(R.id.account_screen)
+    ImageView mAccountScreen;
     private AccountAdapter mAdapter;
 
     @Override
@@ -58,6 +63,13 @@ public class AccountListFragment extends MVPBaseFragment<AccountListContract.Acc
 
         mAdapter = new AccountAdapter(getActivity(), R.layout.item_account);
         mAccountRecycle.setAdapter(mAdapter);
+
+        mAccountScreen.setOnClickListener(view -> showPopupWindow(view));
+    }
+
+    private void showPopupWindow(View view) {
+        ScreenPopupWindow screenPopup = new ScreenPopupWindow(getActivity());
+        screenPopup.showRight(view);
     }
 
     @Override
