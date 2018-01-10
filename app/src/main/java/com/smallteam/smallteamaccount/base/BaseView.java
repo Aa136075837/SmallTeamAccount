@@ -11,4 +11,5 @@ public interface BaseView {
     void loadError();
 
     void loadFinish();
+
 }

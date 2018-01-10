@@ -17,13 +17,12 @@ import retrofit2.http.POST;
 
 public interface ApiService {
 
-    @POST("mock/5a41adb2b80e3f3080db1dd6/app/login/login")
+    @POST("mock/5a41adb2b80e3f3080db1dd6/app")
     Observable<NormalBean> test(@Body RequestBody body);
 
     @POST("userController/loginPhone")
     Observable<NormalBean> niaBieLV(@Body RequestBody body);
 
-    @FormUrlEncoded
     @POST("accountController/loginPhone")
-    Observable<ServerResultBean<UserBean>> login(@Field("phoneNum") String phoneNum, @Field("code") String code);
+    Observable<ServerResultBean<UserBean>> login(@Body RequestBody body);
 }

@@ -14,7 +14,7 @@ import com.smallteam.smallteamaccount.utils.L;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
-public class BaseActivity extends AppCompatActivity implements BaseView {
+public abstract class BaseActivity extends AppCompatActivity implements BaseView {
 
     private CompositeDisposable mCompositeDisposable;
     private ProgressDialogUtils mProgressBar = null;

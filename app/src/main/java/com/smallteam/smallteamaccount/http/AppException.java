@@ -29,6 +29,16 @@ public class AppException {
     public static final int NET_TIME_OUT = 0x113;
     public static final String NET_TIME_OUT_MSG = "网络超时...";
 
+    private String msg;
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
     private static void loadError(Context context, String msg) {
         if (!TextUtils.isEmpty(msg)) {
             Observable.just(msg).observeOn(AndroidSchedulers.mainThread()).subscribe(s -> {

@@ -1,6 +1,7 @@
 package com.smallteam.smallteamaccount.ui.activity;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.widget.Button;
@@ -29,6 +30,7 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.LoginPresenter>
     CardView mCv;
     @BindView(R.id.tv_login_getCode)
     TextView getCodeTv;
+    private CountDownTimer timer;
 
     @Override
     protected int initLayout() {
@@ -48,8 +50,8 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.LoginPresenter>
     @Override
     protected void initEvents() {
         mBtGo.setOnClickListener(v -> {
-//            login();
-            loginSuccess();
+            login();
+//            loginSuccess();
         });
         getCodeTv.setOnClickListener(view -> getCode());
     }
@@ -60,6 +62,8 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.LoginPresenter>
             EasyToast.showShort(this, R.string.toast_username_not_null);
             return;
         }
+        //获取验证码，同时进行60s倒计时
+        enableCodeUi();
         mPresenter.getCode(username);
     }
 
@@ -91,7 +95,36 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.LoginPresenter>
 
     @Override
     public void loginFailed() {
-
+        getCodeTv.setEnabled(true);
     }
 
+    private void enableCodeUi(){
+        getCodeTv.setEnabled(false);
+        timer = new CountDownTimer(60*1000,1000) {
+            @Override
+            public void onTick(long l) {
+                getCodeTv.setText(l/1000+"后重发");
+            }
+
+            @Override
+            public void onFinish() {
+                getCodeTv.setText("获取验证码");
+                getCodeTv.setEnabled(true);
+            }
+        };
+        timer.start();
+    }
+    /*处理获取验证码失败的情况*/
+    @Override
+    public void dealVerifiyCodeFail() {
+        timer.cancel();
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                getCodeTv.setText("获取验证码");
+                getCodeTv.setEnabled(true);
+            }
+        });
+
+    }
 }

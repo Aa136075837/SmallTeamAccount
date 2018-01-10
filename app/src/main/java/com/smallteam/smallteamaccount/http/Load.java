@@ -109,7 +109,6 @@ public class Load {
             }
         }).subscribeOn(Schedulers.io()).concatMap(observable -> observable).observeOn(AndroidSchedulers.mainThread()).concatMap(tServerResultBean -> {
             if (tServerResultBean!=null){
-                L.d("11"+Thread.currentThread());
                 if (tServerResultBean.getCode()!=SysConstant.RESULT_CODE_SUCCESS){
                     throw ServiceException.create(tServerResultBean.getCode(),tServerResultBean.getMsg());
                 }
