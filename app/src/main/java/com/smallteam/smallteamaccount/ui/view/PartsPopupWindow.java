@@ -37,6 +37,7 @@ public class PartsPopupWindow extends PopupWindow {
         btn.setOnClickListener(v -> getCheckedName(adapter));
 
         setContentView(view);
+        setBackgroundDrawable(null);
         setHeight(DisplayUtil.dip2px(context, 370));
         setWidth(DisplayUtil.dip2px(context, 198));
         setFocusable(true);

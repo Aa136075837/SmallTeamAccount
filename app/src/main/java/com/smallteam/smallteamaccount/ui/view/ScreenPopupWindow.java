@@ -1,17 +1,22 @@
 package com.smallteam.smallteamaccount.ui.view;
 
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
+import android.os.Build;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 import android.widget.PopupWindow;
-import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.bo.customview.DateZoneChooserView;
 import com.smallteam.smallteamaccount.R;
 import com.smallteam.smallteamaccount.utils.DisplayUtil;
+import com.smallteam.smallteamaccount.utils.EasyToast;
+import com.smallteam.smallteamaccount.utils.WindowUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,25 +26,66 @@ import java.util.List;
  */
 
 public class ScreenPopupWindow extends PopupWindow implements PartsPopupWindow.PartsCheckNameChangedListener {
-    private Context mContext;
+    private Activity mContext;
     private final TextView mPartsName;
+    private final TextView mGridAll;
+    private final TextView mGridDaily;
+    private final TextView mGridHotel;
+    private final TextView mGridEntertain;
+    private final TextView mGridTravel;
+    private final TextView mGridOhter;
+    private final DateZoneChooserView mDzcv;
 
-    public ScreenPopupWindow(Context context) {
+    public ScreenPopupWindow(Activity context) {
         super(context);
         mContext = context;
-        WindowManager manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        int height = manager.getDefaultDisplay().getHeight();
+        int displayHeight = WindowUtils.getInstance(context).getDisplayHeight();
 
         View view = LayoutInflater.from(context).inflate(R.layout.popup_screen_layout, null);
         mPartsName = view.findViewById(R.id.screen_popup_parts_tv);
-        mPartsName.setOnClickListener(v -> parts(v));
+        mGridAll = view.findViewById(R.id.grid_all);
+        mGridDaily = view.findViewById(R.id.grid_daily);
+        mGridHotel = view.findViewById(R.id.grid_hotel);
+        mGridEntertain = view.findViewById(R.id.grid_entertain);
+        mGridTravel = view.findViewById(R.id.grid_travel);
+        mGridOhter = view.findViewById(R.id.grid_other);
+        mDzcv = view.findViewById(R.id.date_zone_chooser);
+
+        initEvent();
 
         setContentView(view);
-        setHeight(height);
+        setBackgroundDrawable(null);
+        setHeight(displayHeight);
         setWidth(DisplayUtil.dip2px(context, 198));
         setFocusable(true);
         setAnimationStyle(R.style.popupWindow_animation_right);
         setOutsideTouchable(true);
+        update();
+    }
+
+
+
+    private void initEvent() {
+        mGridAll.setOnClickListener(v -> {
+            mGridAll.setSelected(!mGridAll.isSelected());
+        });
+        mGridDaily.setOnClickListener(v -> {
+            mGridDaily.setSelected(!mGridDaily.isSelected());
+        });
+        mGridHotel.setOnClickListener(v -> {
+            mGridHotel.setSelected(!mGridHotel.isSelected());
+        });
+        mGridEntertain.setOnClickListener(v -> {
+            mGridEntertain.setSelected(!mGridEntertain.isSelected());
+        });
+        mGridTravel.setOnClickListener(v -> {
+            mGridTravel.setSelected(!mGridTravel.isSelected());
+        });
+        mGridOhter.setOnClickListener(v -> {
+            mGridOhter.setSelected(!mGridOhter.isSelected());
+        });
+
+        mPartsName.setOnClickListener(v -> parts(v));
     }
 
     private void parts(View v) {

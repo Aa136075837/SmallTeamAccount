@@ -43,4 +43,7 @@
     <string name="travel">出行</string>
     <string name="entertainment">文化娱乐</string>
     <string name="other">其他</string>
+
+    <string name="reset">重置</string>
+    <string name="confirm">确认</string>
 </resources>

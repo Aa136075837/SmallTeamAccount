@@ -7,7 +7,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 
 import com.smallteam.smallteamaccount.R;
 import com.smallteam.smallteamaccount.adapter.AccountAdapter;
@@ -68,8 +70,18 @@ public class AccountListFragment extends MVPBaseFragment<AccountListContract.Acc
     }
 
     private void showPopupWindow(View view) {
+        WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
+        lp.alpha = 0.7f;
+        getActivity().getWindow().setAttributes(lp);
         ScreenPopupWindow screenPopup = new ScreenPopupWindow(getActivity());
         screenPopup.showRight(view);
+        screenPopup.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                lp.alpha = 1f;
+                getActivity().getWindow().setAttributes(lp);
+            }
+        });
     }
 
     @Override

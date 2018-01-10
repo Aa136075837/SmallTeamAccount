@@ -44,6 +44,8 @@
                     />
             </RelativeLayout>
             <LinearLayout
+                android:paddingLeft="50dp"
+                android:paddingRight="30dp"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -68,8 +70,8 @@
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
             <LinearLayout
-                android:paddingStart="50dp"
-                android:paddingEnd="30dp"
+                android:paddingLeft="50dp"
+                android:paddingRight="30dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:layout_width="match_parent"

@@ -2,11 +2,13 @@ package com.bo.customview;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -30,6 +32,9 @@ public class DateZoneChooserView extends LinearLayout implements DatePicker.OnDa
     private DatePicker mDp;
     private boolean isStart;
     private boolean isEnd;
+    private LinearLayout mLl;
+    private TextView mBtn;
+    private final String SHORT_LINE = "-";
 
     public DateZoneChooserView(Context context) {
         this(context, null);
@@ -41,6 +46,8 @@ public class DateZoneChooserView extends LinearLayout implements DatePicker.OnDa
         View view = LayoutInflater.from(context).inflate(R.layout.date_zone, this, false);
         mStartTv = view.findViewById(R.id.date_zone_start);
         mEndTv = view.findViewById(R.id.date_zone_end);
+        mLl = view.findViewById(R.id.date_zone_ll);
+        mBtn = view.findViewById(R.id.date_zone_btn);
         {
             Calendar calendar = Calendar.getInstance();
             int year = calendar.get(Calendar.YEAR);
@@ -87,8 +94,8 @@ public class DateZoneChooserView extends LinearLayout implements DatePicker.OnDa
     }
 
     private void resizeNumberPicker(NumberPicker np) {
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(80, LayoutParams.WRAP_CONTENT);
-        params.setMargins(0, 0, 30, 0);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(60, LayoutParams.WRAP_CONTENT);
+        params.setMargins(0, 0, 40, 0);
         np.setLayoutParams(params);
     }
 
@@ -100,7 +107,7 @@ public class DateZoneChooserView extends LinearLayout implements DatePicker.OnDa
                 isStart = true;
                 mStartTv.setSelected(true);
                 mEndTv.setSelected(false);
-                mDp.setVisibility(View.VISIBLE);
+                mLl.setVisibility(View.VISIBLE);
             }
         });
 
@@ -111,18 +118,42 @@ public class DateZoneChooserView extends LinearLayout implements DatePicker.OnDa
                 isEnd = true;
                 mStartTv.setSelected(false);
                 mEndTv.setSelected(true);
-                mDp.setVisibility(View.VISIBLE);
+                mLl.setVisibility(View.VISIBLE);
             }
         });
+        mBtn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setDate2Tv();
+                mStartTv.setSelected(false);
+                mEndTv.setSelected(false);
+                mLl.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    private void setDate2Tv() {
+        StringBuffer sb = new StringBuffer();
+        sb.append(mDp.getYear());
+        sb.append(SHORT_LINE);
+        sb.append(mDp.getMonth()+1);
+        sb.append(SHORT_LINE);
+        sb.append(mDp.getDayOfMonth());
+        if (isStart) {
+            mStartTv.setText(sb.toString());
+        }
+        if (isEnd) {
+            mEndTv.setText(sb.toString());
+        }
     }
 
     @Override
     public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
         if (isStart) {
-            mStartTv.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+            mStartTv.setText(year + SHORT_LINE + (monthOfYear + 1) + SHORT_LINE + dayOfMonth);
         }
         if (isEnd) {
-            mEndTv.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+            mEndTv.setText(year + SHORT_LINE + (monthOfYear + 1) + SHORT_LINE + dayOfMonth);
         }
     }
 
