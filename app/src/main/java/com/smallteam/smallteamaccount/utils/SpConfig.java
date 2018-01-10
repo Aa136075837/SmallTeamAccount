@@ -1,5 +1,13 @@
 package com.smallteam.smallteamaccount.utils;
 
+import android.text.TextUtils;
+
+import com.google.gson.Gson;
+import com.smallteam.smallteamaccount.base.SmallTeamApp;
+import com.smallteam.smallteamaccount.bean.UserBean;
+
+import org.json.JSONObject;
+
 /**
  * 所有的关于sp的操作都通过该类实现
  * Created by TENGFEI on 2018/1/10.
@@ -14,7 +22,17 @@ public class SpConfig {
     private SpConfig() {
     }
 
-    public void setUser(){
+    public void setUser(UserBean value){
+        Gson gson = new Gson();
+        SPUtils.putString(SmallTeamApp.getInstance().getApplicationContext(),"USER",gson.toJson(value));
+    }
 
+    public UserBean getUser(){
+        String user = SPUtils.getString(SmallTeamApp.getInstance().getApplicationContext(), "USER");
+        if (TextUtils.isEmpty(user)){
+            return null;
+        }
+        Gson gson = new Gson();
+        return gson.fromJson(user,UserBean.class);
     }
 }

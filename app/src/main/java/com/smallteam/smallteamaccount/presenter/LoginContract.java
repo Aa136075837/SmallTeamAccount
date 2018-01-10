@@ -11,6 +11,7 @@ import com.smallteam.smallteamaccount.http.HttpObserver;
 import com.smallteam.smallteamaccount.http.Load;
 import com.smallteam.smallteamaccount.http.RequestBodyUtils;
 import com.smallteam.smallteamaccount.utils.EasyToast;
+import com.smallteam.smallteamaccount.utils.SpConfig;
 
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
@@ -44,6 +45,7 @@ public interface LoginContract {
                 .login(RequestBodyUtils.getParams(map))).subscribeWith(new HttpObserver<UserBean>(mContext) {
                 @Override
                 protected void call(UserBean value) {
+                    SpConfig.getInstance().setUser(value);
                     mView.loginSuccess();
                 }
 
