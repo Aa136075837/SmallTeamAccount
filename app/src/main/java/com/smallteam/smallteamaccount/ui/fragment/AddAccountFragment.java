@@ -1,9 +1,5 @@
 package com.smallteam.smallteamaccount.ui.fragment;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -16,8 +12,6 @@ import com.smallteam.smallteamaccount.presenter.AddAccountContract;
 import com.smallteam.smallteamaccount.utils.StringUtil;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.FormBody;
