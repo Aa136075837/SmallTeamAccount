@@ -71,7 +71,7 @@ public class AccountListFragment extends MVPBaseFragment<AccountListContract.Acc
 
     private void showPopupWindow(View view) {
         WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
-        lp.alpha = 0.7f;
+        lp.alpha = 0.4f;
         getActivity().getWindow().setAttributes(lp);
         ScreenPopupWindow screenPopup = new ScreenPopupWindow(getActivity());
         screenPopup.showRight(view);

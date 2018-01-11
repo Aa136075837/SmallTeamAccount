@@ -1,21 +1,15 @@
 package com.smallteam.smallteamaccount.ui.view;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.Context;
-import android.os.Build;
-import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.bo.customview.DateZoneChooserView;
 import com.smallteam.smallteamaccount.R;
 import com.smallteam.smallteamaccount.utils.DisplayUtil;
-import com.smallteam.smallteamaccount.utils.EasyToast;
 import com.smallteam.smallteamaccount.utils.WindowUtils;
 
 import java.util.ArrayList;
@@ -33,8 +27,10 @@ public class ScreenPopupWindow extends PopupWindow implements PartsPopupWindow.P
     private final TextView mGridHotel;
     private final TextView mGridEntertain;
     private final TextView mGridTravel;
-    private final TextView mGridOhter;
+    private final TextView mGridOther;
     private final DateZoneChooserView mDzcv;
+    private final TextView mReset;
+    private final TextView mConfirm;
 
     public ScreenPopupWindow(Activity context) {
         super(context);
@@ -48,8 +44,10 @@ public class ScreenPopupWindow extends PopupWindow implements PartsPopupWindow.P
         mGridHotel = view.findViewById(R.id.grid_hotel);
         mGridEntertain = view.findViewById(R.id.grid_entertain);
         mGridTravel = view.findViewById(R.id.grid_travel);
-        mGridOhter = view.findViewById(R.id.grid_other);
+        mGridOther = view.findViewById(R.id.grid_other);
         mDzcv = view.findViewById(R.id.date_zone_chooser);
+        mReset = view.findViewById(R.id.screen_reset);
+        mConfirm = view.findViewById(R.id.screen_confirm);
 
         initEvent();
 
@@ -62,7 +60,6 @@ public class ScreenPopupWindow extends PopupWindow implements PartsPopupWindow.P
         setOutsideTouchable(true);
         update();
     }
-
 
 
     private void initEvent() {
@@ -81,11 +78,30 @@ public class ScreenPopupWindow extends PopupWindow implements PartsPopupWindow.P
         mGridTravel.setOnClickListener(v -> {
             mGridTravel.setSelected(!mGridTravel.isSelected());
         });
-        mGridOhter.setOnClickListener(v -> {
-            mGridOhter.setSelected(!mGridOhter.isSelected());
+        mGridOther.setOnClickListener(v -> {
+            mGridOther.setSelected(!mGridOther.isSelected());
         });
 
         mPartsName.setOnClickListener(v -> parts(v));
+        mReset.setOnClickListener(v -> {
+            reset();
+        });
+        mConfirm.setOnClickListener(v -> {
+            dismiss();
+        });
+    }
+
+    private void reset() {
+        mGridAll.setSelected(false);
+        mGridDaily.setSelected(false);
+        mGridHotel.setSelected(false);
+        mGridEntertain.setSelected(false);
+        mGridTravel.setSelected(false);
+        mGridOther.setSelected(false);
+
+        mPartsName.setText(R.string.whole_parts_name);
+
+        mDzcv.reset();
     }
 
     private void parts(View v) {
@@ -99,7 +115,7 @@ public class ScreenPopupWindow extends PopupWindow implements PartsPopupWindow.P
         PartsPopupWindow partsPopupWindow = new PartsPopupWindow(mContext, list);
         partsPopupWindow.setPartsCheckNameChangedListener(this);
         if (!partsPopupWindow.isShowing()) {
-            partsPopupWindow.showAsDropDown(mView);
+            partsPopupWindow.showAsDropDown(mView, 0, -50);
         }
     }
 

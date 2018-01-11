@@ -38,7 +38,7 @@ public class PartsPopupWindow extends PopupWindow {
 
         setContentView(view);
         setBackgroundDrawable(null);
-        setHeight(DisplayUtil.dip2px(context, 370));
+        setHeight(DisplayUtil.dip2px(context, 320));
         setWidth(DisplayUtil.dip2px(context, 198));
         setFocusable(true);
         setAnimationStyle(R.style.popupWindow_animation_top);

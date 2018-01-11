@@ -14,6 +14,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.customview.R;
 
@@ -136,7 +137,7 @@ public class DateZoneChooserView extends LinearLayout implements DatePicker.OnDa
         StringBuffer sb = new StringBuffer();
         sb.append(mDp.getYear());
         sb.append(SHORT_LINE);
-        sb.append(mDp.getMonth()+1);
+        sb.append(mDp.getMonth() + 1);
         sb.append(SHORT_LINE);
         sb.append(mDp.getDayOfMonth());
         if (isStart) {
@@ -147,12 +148,33 @@ public class DateZoneChooserView extends LinearLayout implements DatePicker.OnDa
         }
     }
 
+    private int startYear, startMonth, startDay;
+    private final String ERROR_MSG = "结束日期不能小于开始日期";
+
     @Override
     public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
         if (isStart) {
             mStartTv.setText(year + SHORT_LINE + (monthOfYear + 1) + SHORT_LINE + dayOfMonth);
+            Log.e("getDrawingTime"," getDrawingTime ==> "+ view.getDrawingTime());
+            startYear = year;
+            startMonth = monthOfYear;
+            startDay = dayOfMonth;
         }
         if (isEnd) {
+//            if (year < startYear) {
+//                Toast.makeText(mContext, ERROR_MSG, Toast.LENGTH_SHORT).show();
+//                return;
+//            }else {
+//                if (year == startYear && monthOfYear < startMonth){
+//                    Toast.makeText(mContext, ERROR_MSG, Toast.LENGTH_SHORT).show();
+//                    return;
+//                }else {
+//                    if (monthOfYear == startMonth && dayOfMonth < startDay){
+//                        Toast.makeText(mContext, ERROR_MSG, Toast.LENGTH_SHORT).show();
+//                        return;
+//                    }
+//                }
+//            }
             mEndTv.setText(year + SHORT_LINE + (monthOfYear + 1) + SHORT_LINE + dayOfMonth);
         }
     }
@@ -162,5 +184,10 @@ public class DateZoneChooserView extends LinearLayout implements DatePicker.OnDa
      */
     public String[] getDateZone() {
         return new String[]{mStartTv.getText().toString().trim(), mEndTv.getText().toString().trim()};
+    }
+
+    public void reset() {
+        mStartTv.setText("开始日期");
+        mEndTv.setText("结束日期");
     }
 }

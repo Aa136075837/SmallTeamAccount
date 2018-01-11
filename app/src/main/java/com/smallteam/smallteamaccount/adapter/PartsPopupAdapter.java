@@ -6,11 +6,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.smallteam.smallteamaccount.R;
 import com.smallteam.smallteamaccount.base.SmallTeamApp;
-import com.smallteam.smallteamaccount.utils.L;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +48,7 @@ public class PartsPopupAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = LayoutInflater.from(SmallTeamApp.getInstance()).inflate(R.layout.item_parts_popup, parent, false);
             holder = new PartsHolder();
+            holder.mLayout = convertView.findViewById(R.id.item_part_ll);
             holder.mTextView = convertView.findViewById(R.id.item_part_tv);
             holder.mCheckBox = convertView.findViewById(R.id.item_part_cb);
             convertView.setTag(holder);
@@ -56,10 +57,12 @@ public class PartsPopupAdapter extends BaseAdapter {
         }
         String name = mData.get(position);
         holder.mTextView.setText(name);
-        holder.mCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        PartsHolder finalHolder = holder;
+        holder.mLayout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked && !mCheckedName.contains(name)){
+            public void onClick(View v) {
+                finalHolder.mCheckBox.setChecked(!finalHolder.mCheckBox.isChecked());
+                if (finalHolder.mCheckBox.isChecked() && !mCheckedName.contains(name)){
                     mCheckedName.add(name);
                 }else{
                     mCheckedName.remove(name);
@@ -76,5 +79,6 @@ public class PartsPopupAdapter extends BaseAdapter {
     static class PartsHolder {
         TextView mTextView;
         CheckBox mCheckBox;
+        LinearLayout mLayout;
     }
 }
