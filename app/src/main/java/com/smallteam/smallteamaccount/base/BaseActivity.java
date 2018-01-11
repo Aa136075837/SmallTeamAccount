@@ -114,4 +114,11 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             mProgressBar.dismiss();
         }
     }
+
+    @Override
+    public void loadMsgOrError(int code, String msg) {
+        if (mProgressBar != null) {
+            mProgressBar.dismiss();
+        }
+    }
 }

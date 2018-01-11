@@ -27,10 +27,8 @@ public interface AccountListContract {
     }
 
     class AccountListPresenter extends BasePresenter<AccountListView> {
-        private AccountListView mAccountListView;
         public AccountListPresenter(AccountListView view, Context context) {
             super(view, context);
-            mAccountListView = view;
         }
 
         public void getAccountList() {
@@ -44,7 +42,7 @@ public interface AccountListContract {
                     return normalBean;
                 }
             }).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).subscribeWith(new HttpObserver<NormalBean>(mContext, mAccountListView, true) {
+                .observeOn(AndroidSchedulers.mainThread()).subscribeWith(new HttpObserver<NormalBean>( mView, true) {
                     @Override
                     protected void call(NormalBean value) {
                         mView.getListSuccess(value);

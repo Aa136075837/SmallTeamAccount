@@ -12,4 +12,11 @@ public interface BaseView {
 
     void loadFinish();
 
+    /**
+     * 处理服务器自定义的异常，需页面自己实现
+     * @param code
+     * @param msg
+     */
+    void loadMsgOrError(int code, String msg);
+
 }

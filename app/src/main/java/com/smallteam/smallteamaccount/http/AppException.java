@@ -2,8 +2,8 @@ package com.smallteam.smallteamaccount.http;
 
 import android.content.Context;
 import android.text.TextUtils;
-import android.widget.Toast;
 
+import com.smallteam.smallteamaccount.base.BaseView;
 import com.smallteam.smallteamaccount.utils.EasyToast;
 import com.smallteam.smallteamaccount.utils.L;
 
@@ -21,7 +21,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 public class AppException {
 
     public static final int NET_WORK_ERROR = 0x111;
-    public static final String NET_WORK_ERROE_MSG = "网络出错了...";
+    public static final String NET_WORK_ERROR_MSG = "网络出错了...";
 
     public static final int SERVICE_ERROR = 0x112;
     public static final String SERVICE_ERROR_MSG = "服务器出错了...";
@@ -48,13 +48,33 @@ public class AppException {
         }
     }
 
-    public static void handleException(Context context, Throwable e) {
+    /**
+     * 通过view 处理异常，各个页面可以实现
+     * @param view
+     * @param e
+     */
+    public static void handleExceptionByView(BaseView view, Throwable e) {
         if (e instanceof UnknownHostException || e instanceof ConnectException) {
-            loadError(context, NET_WORK_ERROE_MSG + ":" + e.toString());
+            view.loadMsgOrError(NET_WORK_ERROR, NET_WORK_ERROR_MSG);
         } else if (e instanceof ServiceException) {
-            loadError(context, ((ServiceException) e).getMsg() + ":" + e.toString());
+            view.loadMsgOrError(((ServiceException) e).getCode(), ((ServiceException) e).getMsg());
         } else if (e instanceof SocketTimeoutException) {
-            loadError(context, NET_TIME_OUT_MSG + ":" + e.toString());
+            view.loadMsgOrError(NET_TIME_OUT, NET_TIME_OUT_MSG);
+        }
+    }
+
+    /**
+     * 通过Context处理异常
+     * @param context
+     * @param e
+     */
+    public static void handleExceptionByContext(Context context, Throwable e) {
+        if (e instanceof UnknownHostException || e instanceof ConnectException) {
+            loadError(context, NET_WORK_ERROR_MSG);
+        } else if (e instanceof ServiceException) {
+            loadError(context, ((ServiceException) e).getMsg());
+        } else if (e instanceof SocketTimeoutException) {
+            loadError(context, NET_TIME_OUT_MSG);
         }
     }
 }

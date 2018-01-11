@@ -27,11 +27,9 @@ public interface MainContract {
     }
 
     class MainPresenter extends BasePresenter<MainView> {
-        private MainView mMainView;
 
         public MainPresenter(MainView view, Context context) {
             super(view, context);
-            mMainView = view;
         }
 
         public void test() {
@@ -41,7 +39,7 @@ public interface MainContract {
                 .build();
             HttpObserver<NormalBean> httpObserver = Observable.zip(Load.createApi().test(body), Observable.timer(3, TimeUnit.SECONDS),
                 (normalBean, aLong) -> normalBean).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).subscribeWith(new HttpObserver<NormalBean>(mContext, mMainView, true) {
+                .observeOn(AndroidSchedulers.mainThread()).subscribeWith(new HttpObserver<NormalBean>( mView, true) {
                     @Override
                     protected void call(NormalBean value) {
                         mView.textSuccess();

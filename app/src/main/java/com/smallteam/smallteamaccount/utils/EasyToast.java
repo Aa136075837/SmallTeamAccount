@@ -1,11 +1,12 @@
 package com.smallteam.smallteamaccount.utils;
 
 import android.content.Context;
-import android.os.Looper;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.widget.Toast;
+
+import com.smallteam.smallteamaccount.base.SmallTeamApp;
 
 /**
  * Created by Administrator on 2018/1/4.
@@ -31,24 +32,35 @@ public class EasyToast {
     }
 
     /**
-     *  子线程中 显示Toast，默认短时间显示
+     * 子线程中 显示Toast，默认短时间显示
      */
     public static void showInThread(Context context, String msg) {
         showInThread(context, msg, Toast.LENGTH_SHORT);
     }
+    public static void showInThread(Context context, @StringRes int msg) {
+        showInThread(context, msg, Toast.LENGTH_SHORT);
+    }
 
     public static void showInThread(Context context, String msg, @Length int length) {
-        new Thread() {
+        SmallTeamApp.getHandler().post(new Runnable() {
             @Override
             public void run() {
-                Looper.prepare();
                 Toast toast = getToast(context);
                 toast.setText(msg);
-                toast.setDuration(length);
                 toast.show();
-                Looper.loop();
             }
-        }.start();
+        });
+    }
+
+    public static void showInThread(Context context, @StringRes int msg, @Length int length) {
+        SmallTeamApp.getHandler().post(new Runnable() {
+            @Override
+            public void run() {
+                Toast toast = getToast(context);
+                toast.setText(msg);
+                toast.show();
+            }
+        });
     }
 
     public static void showShort(@NonNull Context context, @StringRes int stringId) {

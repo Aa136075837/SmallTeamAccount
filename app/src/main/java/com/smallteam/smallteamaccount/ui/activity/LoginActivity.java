@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 
@@ -98,12 +99,18 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.LoginPresenter>
         getCodeTv.setEnabled(true);
     }
 
-    private void enableCodeUi(){
+    @Override
+    public void loadMsgOrError(int code, String msg) {
+        super.loadMsgOrError(code, msg);
+        EasyToast.showShort(this, code + " : " + msg);
+    }
+
+    private void enableCodeUi() {
         getCodeTv.setEnabled(false);
-        timer = new CountDownTimer(60*1000,1000) {
+        timer = new CountDownTimer(60 * 1000, 1000) {
             @Override
             public void onTick(long l) {
-                getCodeTv.setText(l/1000+"后重发");
+                getCodeTv.setText(l / 1000 + "后重发");
             }
 
             @Override
@@ -114,9 +121,10 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.LoginPresenter>
         };
         timer.start();
     }
+
     /*处理获取验证码失败的情况*/
     @Override
-    public void dealVerifiyCodeFail() {
+    public void dealVerifyCodeFail() {
         timer.cancel();
         runOnUiThread(new Runnable() {
             @Override

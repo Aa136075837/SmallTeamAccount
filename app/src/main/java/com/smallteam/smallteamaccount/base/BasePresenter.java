@@ -26,8 +26,6 @@ public class BasePresenter<V extends BaseView> implements AbBasePresenter {
     public BasePresenter(V view, Context context) {
         mView = view;
         mContext = context;
-
-
     }
 
     private CompositeDisposable getCompositeDisposable() {

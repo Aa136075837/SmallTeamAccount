@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.smallteam.smallteamaccount.base.BaseView;
+import com.smallteam.smallteamaccount.constant.SysConstant;
+import com.smallteam.smallteamaccount.utils.EasyToast;
 
 import io.reactivex.observers.DisposableObserver;
 
@@ -16,18 +18,25 @@ public abstract class HttpObserver<T> extends DisposableObserver<T> {
     private Context mContext;
     private boolean isShowLoading;
 
+    /**
+     * 如果 页面 不需要自己处理异常信息，也不需要 显示加载进度条，就用该构造器
+     */
     public HttpObserver(Context context) {
         mContext = context;
     }
 
-    public HttpObserver(Context context, BaseView view) {
+    /**
+     * 如果 页面 要自己处理异常信息， 但 不需要 显示加载进度条，就用该构造器
+     */
+    public HttpObserver(BaseView view) {
         mView = view;
-        mContext = context;
     }
 
-    public HttpObserver(Context context, BaseView view, boolean isShowLoading) {
+    /**
+     * 如果 页面 即 需要自己处理异常，又 需要 显示加载进度条，就用该构造器
+     */
+    public HttpObserver(BaseView view, boolean isShowLoading) {
         mView = view;
-        mContext = context;
         this.isShowLoading = isShowLoading;
     }
 
@@ -41,7 +50,7 @@ public abstract class HttpObserver<T> extends DisposableObserver<T> {
 
     @Override
     public void onNext(T value) {
-        if (mView != null) {
+        if (mView != null && isShowLoading) {
             mView.loadFinish();
         }
         if (value == null) {
@@ -58,14 +67,13 @@ public abstract class HttpObserver<T> extends DisposableObserver<T> {
 
     @Override
     public void onError(Throwable e) {
-        if (e instanceof ServiceException) {
-
-        }
-        if (mView != null) {
+        if (mView != null && isShowLoading) {
             mView.loadError();
         }
-        if (mContext != null) {
-            AppException.handleException(mContext, e);
+        if (mView != null) {
+            AppException.handleExceptionByView(mView, e);
+        } else if (mContext != null) {
+            AppException.handleExceptionByContext(mContext, e);
         }
     }
 

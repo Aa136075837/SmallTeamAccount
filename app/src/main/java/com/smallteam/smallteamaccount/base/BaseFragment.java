@@ -134,4 +134,11 @@ public abstract class BaseFragment extends Fragment implements BaseView {
             mProgressBar.dismiss();
         }
     }
+
+    @Override
+    public void loadMsgOrError(int code, String msg) {
+        if (mProgressBar != null) {
+            mProgressBar.dismiss();
+        }
+    }
 }

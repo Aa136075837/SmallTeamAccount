@@ -2,7 +2,6 @@ package com.smallteam.smallteamaccount.http;
 
 import com.google.gson.GsonBuilder;
 import com.smallteam.smallteamaccount.BuildConfig;
-import com.smallteam.smallteamaccount.R;
 import com.smallteam.smallteamaccount.base.SmallTeamApp;
 import com.smallteam.smallteamaccount.bean.ServerResultBean;
 import com.smallteam.smallteamaccount.constant.SysConstant;
@@ -11,13 +10,9 @@ import com.smallteam.smallteamaccount.utils.L;
 import com.smallteam.smallteamaccount.utils.NetUtil;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.BiFunction;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
+
 import java.security.SecureRandom;
 import java.util.concurrent.TimeUnit;
 
@@ -100,17 +95,17 @@ public class Load {
     }
 
 
-    public static <T> Observable<T> call(Observable<ServerResultBean<T>> srcObs){
+    public static <T> Observable<T> call(Observable<ServerResultBean<T>> srcObs) {
 
         return Observable.just(srcObs).doOnNext(observable -> {
             /*判断是否有网络*/
-            if(NetUtil.getNetworkState(SmallTeamApp.getInstance().getApplicationContext())==NetUtil.NETWORN_NONE){
-                throw ServiceException.create(SysConstant.ERROR_CODE_NO_NET,AppException.NET_WORK_ERROE_MSG);
+            if (NetUtil.getNetworkState(SmallTeamApp.getInstance().getApplicationContext()) == NetUtil.NETWORN_NONE) {
+                throw ServiceException.create(SysConstant.ERROR_CODE_NO_NET, AppException.NET_WORK_ERROR_MSG);
             }
         }).subscribeOn(Schedulers.io()).concatMap(observable -> observable).observeOn(AndroidSchedulers.mainThread()).concatMap(tServerResultBean -> {
-            if (tServerResultBean!=null){
-                if (tServerResultBean.getCode()!=SysConstant.RESULT_CODE_SUCCESS){
-                    throw ServiceException.create(tServerResultBean.getCode(),tServerResultBean.getMsg());
+            if (tServerResultBean != null) {
+                if (tServerResultBean.getCode() != SysConstant.RESULT_CODE_SUCCESS) {
+                    throw ServiceException.create(tServerResultBean.getCode(), tServerResultBean.getMsg());
                 }
             }
             return Observable.just(tServerResultBean.getBean());
