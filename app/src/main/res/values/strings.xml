@@ -19,7 +19,6 @@
     <string name="ee">私人账单</string>
 
 
-
     <string name="login">登录</string>
     <string name="Username">手机号码</string>
     <string name="Password">验证码</string>
@@ -46,4 +45,7 @@
 
     <string name="reset">重置</string>
     <string name="confirm">确认</string>
+    <string name="screen">筛选</string>
+    <string name="count_of_money">金额</string>
+    <string name="date">日期</string>
 </resources>

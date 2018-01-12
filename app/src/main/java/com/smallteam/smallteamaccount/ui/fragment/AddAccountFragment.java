@@ -1,63 +1,44 @@
 package com.smallteam.smallteamaccount.ui.fragment;
 
-import android.widget.Button;
+import android.os.Bundle;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.smallteam.smallteamaccount.R;
 import com.smallteam.smallteamaccount.base.MVPBaseFragment;
-import com.smallteam.smallteamaccount.bean.NormalBean;
-import com.smallteam.smallteamaccount.http.HttpObserver;
-import com.smallteam.smallteamaccount.http.Load;
 import com.smallteam.smallteamaccount.presenter.AddAccountContract;
-import com.smallteam.smallteamaccount.utils.StringUtil;
 
 import butterknife.BindView;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-import okhttp3.FormBody;
-import okhttp3.RequestBody;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * Created by Administrator on 2018/1/4.
  */
 
 public class AddAccountFragment extends MVPBaseFragment<AddAccountContract.AddAccountPresenter> implements AddAccountContract.AddAccountView {
-    @BindView(R.id.test_et)
-    EditText mTestEt;
-    @BindView(R.id.send_code)
-    Button mSendCode;
-    @BindView(R.id.test_phone)
-    EditText mTestPhone;
-    @BindView(R.id.check_code)
-    Button mCheckCode;
-    private String mPhone;
+
+    @BindView(R.id.add_money_et)
+    EditText mAddMoneyEt;
+    @BindView(R.id.add_date_et)
+    TextInputEditText mAddDateEt;
+    @BindView(R.id.add_types_et)
+    TextInputEditText mAddTypesEt;
+    @BindView(R.id.add_parts_et)
+    TextInputEditText mAddPartsEt;
+    @BindView(R.id.textlayout)
+    TextInputLayout mtextlayout;
 
     @Override
     protected void initEvents() {
+        mAddDateEt.setOnClickListener(v -> {
 
-        mSendCode.setOnClickListener(view -> {
-            mPhone = mTestPhone.getText().toString().trim();
-            if (StringUtil.strIsPhone(getActivity(), mPhone)) {
-                mPresenter.sendCode("86", mPhone);
-            }
         });
-
-        mCheckCode.setOnClickListener(view -> {
-            if(!StringUtil.strIsPhone(getActivity(), mPhone)){
-                return;
-            }
-            RequestBody body = new FormBody.Builder()
-                .add("phoneNum", mPhone)
-                .add("code", mTestEt.getText().toString().trim()).build();
-            HttpObserver<NormalBean> httpObserver = Load.createApi().niaBieLV(body).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new HttpObserver<NormalBean>(getActivity()) {
-                    @Override
-                    protected void call(NormalBean value) {
-
-                    }
-                });
-            addObservable(httpObserver);
-        });
+        mtextlayout.setPasswordVisibilityToggleEnabled(false);
     }
 
     @Override
@@ -74,4 +55,5 @@ public class AddAccountFragment extends MVPBaseFragment<AddAccountContract.AddAc
     protected int getLayoutResId() {
         return R.layout.fragment_add_account;
     }
+
 }

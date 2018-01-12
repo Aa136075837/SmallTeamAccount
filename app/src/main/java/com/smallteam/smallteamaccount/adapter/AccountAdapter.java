@@ -49,20 +49,16 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountH
     static class AccountHolder extends RecyclerView.ViewHolder {
 
         private final View mLeftView;
-        private final TextView mPartsTv;
         private final TextView mPayerTv;
         private final TextView mDate;
         private final TextView mMoney;
-        private final TextView mRemakesTv;
 
         public AccountHolder(View itemView) {
             super(itemView);
             mLeftView = itemView.findViewById(R.id.item_left_view);
-            mPartsTv = itemView.findViewById(R.id.item_parts);
             mPayerTv = itemView.findViewById(R.id.item_payer);
             mDate = itemView.findViewById(R.id.item_date);
             mMoney = itemView.findViewById(R.id.item_money);
-            mRemakesTv = itemView.findViewById(R.id.item_remakes);
         }
     }
 }

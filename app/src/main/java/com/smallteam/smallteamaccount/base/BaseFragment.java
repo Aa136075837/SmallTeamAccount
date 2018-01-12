@@ -60,7 +60,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = LayoutInflater.from(SmallTeamApp.getInstance()).inflate(getLayoutResId(), container, false);
+        View view = LayoutInflater.from(getActivity()).inflate(getLayoutResId(), container, false);
         mUnbinder = ButterKnife.bind(this, view);
         return view;
     }

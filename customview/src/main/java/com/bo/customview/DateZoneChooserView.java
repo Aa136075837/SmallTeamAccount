@@ -16,6 +16,7 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bo.customview.utils.DatePickerUtils;
 import com.example.customview.R;
 
 import java.util.ArrayList;
@@ -58,7 +59,7 @@ public class DateZoneChooserView extends LinearLayout implements DatePicker.OnDa
             mDp = view.findViewById(R.id.date_zone_dp);
             mDp.setMaxDate(System.currentTimeMillis());
             mDp.init(year, month, day, this);
-            resizePikcer(mDp);
+            DatePickerUtils.resizePicker(mDp);
         }
 
         {
@@ -66,38 +67,6 @@ public class DateZoneChooserView extends LinearLayout implements DatePicker.OnDa
             addView(view);
         }
         initEvent();
-    }
-
-    private void resizePikcer(FrameLayout tp) {
-        List<NumberPicker> npList = findNumberPicker(tp);
-        for (NumberPicker np : npList) {
-            resizeNumberPicker(np);
-        }
-    }
-
-    private List<NumberPicker> findNumberPicker(ViewGroup viewGroup) {
-        List<NumberPicker> npList = new ArrayList<NumberPicker>();
-        View child = null;
-        if (null != viewGroup) {
-            for (int i = 0; i < viewGroup.getChildCount(); i++) {
-                child = viewGroup.getChildAt(i);
-                if (child instanceof NumberPicker) {
-                    npList.add((NumberPicker) child);
-                } else if (child instanceof LinearLayout) {
-                    List<NumberPicker> result = findNumberPicker((ViewGroup) child);
-                    if (result.size() > 0) {
-                        return result;
-                    }
-                }
-            }
-        }
-        return npList;
-    }
-
-    private void resizeNumberPicker(NumberPicker np) {
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(60, LayoutParams.WRAP_CONTENT);
-        params.setMargins(0, 0, 40, 0);
-        np.setLayoutParams(params);
     }
 
     private void initEvent() {

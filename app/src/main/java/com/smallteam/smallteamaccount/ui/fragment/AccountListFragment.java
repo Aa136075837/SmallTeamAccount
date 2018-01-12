@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import com.smallteam.smallteamaccount.R;
 import com.smallteam.smallteamaccount.adapter.AccountAdapter;
@@ -38,7 +39,7 @@ public class AccountListFragment extends MVPBaseFragment<AccountListContract.Acc
     @BindView(R.id.account_refresh)
     SwipeRefreshLayout mAccountRefresh;
     @BindView(R.id.account_screen)
-    ImageView mAccountScreen;
+    TextView mAccountScreen;
     private AccountAdapter mAdapter;
 
     @Override
@@ -69,6 +70,9 @@ public class AccountListFragment extends MVPBaseFragment<AccountListContract.Acc
         mAccountScreen.setOnClickListener(view -> showPopupWindow(view));
     }
 
+    /**
+     * 显示popup 并改变背景亮度
+     */
     private void showPopupWindow(View view) {
         WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
         lp.alpha = 0.4f;
