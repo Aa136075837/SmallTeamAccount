@@ -24,11 +24,11 @@ public class SpConfig {
 
     public void setUser(UserBean value){
         Gson gson = new Gson();
-        SPUtils.putString(SmallTeamApp.getInstance().getApplicationContext(),"USER",gson.toJson(value));
+        SPUtils.putString(SmallTeamApp.getInstance(),"USER",gson.toJson(value));
     }
 
     public UserBean getUser(){
-        String user = SPUtils.getString(SmallTeamApp.getInstance().getApplicationContext(), "USER");
+        String user = SPUtils.getString(SmallTeamApp.getInstance(), "USER");
         if (TextUtils.isEmpty(user)){
             return null;
         }

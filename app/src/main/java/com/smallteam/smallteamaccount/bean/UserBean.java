@@ -47,7 +47,6 @@ public class UserBean implements Serializable {
     private int start;
     private int limit;
     private String orderByClause;
-    private String paraMap;
     private String id;
     private String loginName;
     private String loginPhone;
@@ -103,13 +102,13 @@ public class UserBean implements Serializable {
         this.orderByClause = orderByClause;
     }
 
-    public String getParaMap() {
-        return paraMap;
-    }
-
-    public void setParaMap(String paraMap) {
-        this.paraMap = paraMap;
-    }
+//    public String getParaMap() {
+//        return paraMap;
+//    }
+//
+//    public void setParaMap(String paraMap) {
+//        this.paraMap = paraMap;
+//    }
 
     public String getId() {
         return id;
@@ -351,6 +350,5 @@ public class UserBean implements Serializable {
         this.defaultGroupId = defaultGroupId;
     }
 
-    public static class String {
-    }
+
 }

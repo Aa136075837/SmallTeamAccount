@@ -30,6 +30,9 @@ import com.smallteam.smallteamaccount.ui.view.ProgressDialogUtils;
 import com.smallteam.smallteamaccount.utils.EasyToast;
 import com.smallteam.smallteamaccount.utils.FragmentFactory;
 
+/**
+ * TODO 获取到默认账本的名称；获取用户有哪些账本
+ */
 public class MainActivity extends MVPBaseActivity<MainContract.MainPresenter>
     implements NavigationView.OnNavigationItemSelectedListener, MainContract.MainView {
 
@@ -95,7 +98,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.MainPresenter>
     protected void initEvents() {
         mNavigationView.setNavigationItemSelectedListener(this);
         mFab.setOnClickListener(view -> {
-            mPresenter.test();
+//            mPresenter.test();
         });
     }
 

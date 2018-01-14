@@ -51,8 +51,7 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.LoginPresenter>
     @Override
     protected void initEvents() {
         mBtGo.setOnClickListener(v -> {
-//            login();
-            loginSuccess();
+            login();
         });
         getCodeTv.setOnClickListener(view -> getCode());
     }
