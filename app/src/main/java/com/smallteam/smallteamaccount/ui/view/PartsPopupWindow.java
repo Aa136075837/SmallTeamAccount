@@ -14,7 +14,6 @@ import com.smallteam.smallteamaccount.adapter.PartsPopupAdapter;
 import com.smallteam.smallteamaccount.base.SmallTeamApp;
 import com.smallteam.smallteamaccount.utils.DisplayUtil;
 import com.smallteam.smallteamaccount.utils.EasyToast;
-import com.smallteam.smallteamaccount.utils.L;
 
 import java.util.List;
 
@@ -38,7 +37,7 @@ public class PartsPopupWindow extends PopupWindow {
 
         setContentView(view);
         setBackgroundDrawable(null);
-        setHeight(DisplayUtil.dip2px(context, 320));
+        setHeight(DisplayUtil.dip2px(context, 280));
         setWidth(DisplayUtil.dip2px(context, 198));
         setFocusable(true);
         setAnimationStyle(R.style.popupWindow_animation_top);

@@ -24,7 +24,6 @@ android {
             debuggable true
         }
     }
-
     // 在MobSDK的扩展中注册SMSSDK的相关信息
     MobSDK {
         appKey "2386eadb05d83"
@@ -34,7 +33,6 @@ android {
             gui false
         }
     }
-
     compileOptions {
         targetCompatibility 1.8
         sourceCompatibility 1.8

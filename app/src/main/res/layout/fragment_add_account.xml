@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -22,19 +22,15 @@
         <android.support.design.widget.TextInputLayout
             android:id="@+id/textlayout"
             android:layout_width="match_parent"
-            app:passwordToggleEnabled="true"
-            app:hintEnabled="false"
-            android:background="@null"
-            app:passwordToggleDrawable="@drawable/check_box_selector"
             android:layout_height="wrap_content">
 
             <EditText
                 android:id="@+id/add_money_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:singleLine="true"
                 android:hint="@string/count_of_money"
-                android:inputType="textPassword"
+                android:inputType="numberDecimal"
+                android:singleLine="true"
                 android:textSize="14sp" />
         </android.support.design.widget.TextInputLayout>
     </LinearLayout>
@@ -75,30 +71,117 @@
         android:layout_marginTop="8dp"
         android:background="@color/white"
         android:gravity="center_vertical"
+        android:orientation="vertical"
         android:padding="8dp">
 
-        <TextView
-            android:layout_width="80dp"
-            android:textSize="16sp"
-            android:layout_height="wrap_content"
-            android:text="@string/consumption_types" />
-
-        <android.support.design.widget.TextInputLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:hint="@string/daily_use">
+            android:layout_height="wrap_content">
 
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/add_types_et"
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/consumption_types"
+                android:textSize="16sp" />
+
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableRight="@drawable/screen_arrow"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:inputType="numberDecimal"
-                android:textSize="14sp" />
-        </android.support.design.widget.TextInputLayout>
+                android:layout_marginLeft="16dp">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/add_types_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/screen_arrow"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:inputType="numberDecimal"
+                    android:text="@string/daily_use"
+                    android:textSize="14sp" />
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+
+        <GridLayout
+            android:id="@+id/add_grid_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="3"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/add_grid_all"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:background="@drawable/shape_cunsumption_types_selector"
+                android:gravity="center"
+                android:text="@string/whole_parts_name"
+                android:textColor="@color/text_title_color"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/add_grid_daily"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:background="@drawable/shape_cunsumption_types_selector"
+                android:gravity="center"
+                android:text="@string/daily_use"
+                android:textColor="@color/text_title_color"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/add_grid_hotel"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:background="@drawable/shape_cunsumption_types_selector"
+                android:gravity="center"
+                android:text="@string/stay_hotel"
+                android:textColor="@color/text_title_color"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/add_grid_travel"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:background="@drawable/shape_cunsumption_types_selector"
+                android:gravity="center"
+                android:text="@string/travel"
+                android:textColor="@color/text_title_color"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/add_grid_entertain"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:background="@drawable/shape_cunsumption_types_selector"
+                android:gravity="center"
+                android:text="@string/entertainment"
+                android:textColor="@color/text_title_color"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/add_grid_other"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:background="@drawable/shape_cunsumption_types_selector"
+                android:gravity="center"
+                android:text="@string/other"
+                android:textColor="@color/text_title_color"
+                android:textSize="12sp" />
+        </GridLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -111,15 +194,14 @@
 
         <TextView
             android:layout_width="80dp"
-            android:textSize="16sp"
             android:layout_height="wrap_content"
-            android:text="@string/participants" />
+            android:text="@string/participants"
+            android:textSize="16sp" />
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:hint="X X X">
+            android:layout_marginLeft="16dp">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/add_parts_et"
@@ -129,6 +211,7 @@
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:inputType="numberDecimal"
+                android:text="X X X"
                 android:textSize="14sp" />
         </android.support.design.widget.TextInputLayout>
     </LinearLayout>
