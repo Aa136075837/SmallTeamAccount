@@ -13,13 +13,14 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/main_tab_header_iV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         app:srcCompat="@drawable/sidebar_head_icon" />
 
     <TextView
+        android:id="@+id/main_tab_header_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
@@ -27,7 +28,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/main_tab_header_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="176 **** 3211" />

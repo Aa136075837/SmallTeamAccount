@@ -1,6 +1,5 @@
 package com.smallteam.smallteamaccount.ui.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.smallteam.smallteamaccount.R;
@@ -13,14 +12,13 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
-
         SmallTeamApp.getHandler().postDelayed(() -> {
             if (SpConfig.getInstance().getUser() != null) {
                 startAcvitity(MainActivity.class);
             }else {
                 startAcvitity(LoginActivity.class);
             }
+            finish();
         },3*1000);
     }
 }

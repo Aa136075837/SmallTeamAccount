@@ -6,6 +6,8 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -20,6 +22,7 @@ import android.widget.TableLayout;
 import android.widget.Toast;
 
 import com.smallteam.smallteamaccount.R;
+import com.smallteam.smallteamaccount.adapter.DrawerTabAdapter;
 import com.smallteam.smallteamaccount.base.BaseFragment;
 import com.smallteam.smallteamaccount.base.MVPBaseActivity;
 import com.smallteam.smallteamaccount.presenter.MainContract;
@@ -30,19 +33,22 @@ import com.smallteam.smallteamaccount.ui.view.ProgressDialogUtils;
 import com.smallteam.smallteamaccount.utils.EasyToast;
 import com.smallteam.smallteamaccount.utils.FragmentFactory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * TODO 获取到默认账本的名称；获取用户有哪些账本
  */
 public class MainActivity extends MVPBaseActivity<MainContract.MainPresenter>
-    implements NavigationView.OnNavigationItemSelectedListener, MainContract.MainView {
+    implements MainContract.MainView, DrawerTabAdapter.DrawerItemClickListener {
 
-    private NavigationView mNavigationView;
-    private FloatingActionButton mFab;
     private AccountListFragment mAccountListFragment;
     private Toolbar mToolbar;
     private AddAccountFragment mAddAccountFragment;
     private UserBalanceFragment mUserBalanceFragment;
     private BottomNavigationView mBnv;
+    private RecyclerView mRv;
+    private DrawerLayout mDrawer;
 
     @Override
     protected int initLayout() {
@@ -58,48 +64,69 @@ public class MainActivity extends MVPBaseActivity<MainContract.MainPresenter>
     protected void initViews() {
         mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
-        mFab = findViewById(R.id.fab);
         mBnv = findViewById(R.id.bnv_main);
+        mRv = findViewById(R.id.main_tab_rv);
+
         initTab();
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        mDrawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-            this, drawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
+            this, mDrawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mDrawer.addDrawerListener(toggle);
         toggle.syncState();
-        mNavigationView = findViewById(R.id.nav_view);
         /**默认进入账单列表页面*/
-//        mNavigationView.setCheckedItem(R.id.nav_camera);
         toAccountListFragment();
     }
 
     private void initTab() {
-        mBnv.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int itemId = item.getItemId();
-                item.setChecked(true);
-                switch (itemId) {
-                    case R.id.account_list:
-                        toAccountListFragment();
-                        break;
-                    case R.id.account_balance:
-                        toUserBalanceFragment();
-                        break;
-                    case R.id.account_add:
-                        toAddAccountFragment();
-                        break;
-                }
-                return false;
+        mBnv.setOnNavigationItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            item.setChecked(true);
+            switch (itemId) {
+                case R.id.account_list:
+                    toAccountListFragment();
+                    break;
+                case R.id.account_balance:
+                    toUserBalanceFragment();
+                    break;
+                case R.id.account_add:
+                    toAddAccountFragment();
+                    break;
             }
+            return false;
         });
+
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        mRv.setLayoutManager(manager);
+        List<String> list = new ArrayList<>();
+        list.add("私人账单");
+        list.add("团队账单1");
+        list.add("团队账单2");
+        list.add("团队账单3");
+        list.add("团队账单4");
+        list.add("团队账单5");
+        DrawerTabAdapter adapter = new DrawerTabAdapter(this, list);
+        adapter.setDrawerItemClickListener(this);
+        mRv.setAdapter(adapter);
     }
 
     @Override
     protected void initEvents() {
-        mNavigationView.setNavigationItemSelectedListener(this);
-        mFab.setOnClickListener(view -> {
-//            mPresenter.test();
+
+        findViewById(R.id.main_tab_setting_ll).setOnClickListener(v -> {
+            comming();
+            mDrawer.closeDrawers();
         });
+
+        findViewById(R.id.main_tab_out_ll).setOnClickListener(v -> {
+            comming();
+            mDrawer.closeDrawers();
+        });
+    }
+
+    @Override
+    public void onDrawerItemClick(int position) {
+            comming();
+            mDrawer.closeDrawers();
     }
 
     @Override
@@ -115,30 +142,6 @@ public class MainActivity extends MVPBaseActivity<MainContract.MainPresenter>
         } else {
             super.onBackPressed();
         }
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-            toAccountListFragment();
-        } else if (id == R.id.nav_gallery) {
-            toAddAccountFragment();
-        } else if (id == R.id.nav_slideshow) {
-            toUserBalanceFragment();
-        } else if (id == R.id.nav_manage) {
-            comming();
-        } else if (id == R.id.nav_share) {
-            comming();
-        } else if (id == R.id.nav_send) {
-            comming();
-        }
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
 
     private void comming() {
@@ -180,20 +183,18 @@ public class MainActivity extends MVPBaseActivity<MainContract.MainPresenter>
 
     @Override
     public void textSuccess() {
-        Snackbar.make(mFab, " 测试请求成功...", Snackbar.LENGTH_LONG).setAction("duai", new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        Snackbar.make(mBnv, " 测试请求成功...", Snackbar.LENGTH_LONG).setAction("duai", view -> {
 
-            }
         }).show();
     }
 
     private long firstTime = 0;
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
             if (System.currentTimeMillis() - firstTime > 2000) {
-                EasyToast.showShort(MainActivity.this,"再按一次退出程序");
+                EasyToast.showShort(MainActivity.this, "再按一次退出程序");
                 firstTime = System.currentTimeMillis();
             } else {
                 finish();

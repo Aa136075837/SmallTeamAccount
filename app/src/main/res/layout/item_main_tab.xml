@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:paddingLeft="16dp"
+    android:minHeight="48dp">
+
+    <ImageView
+        android:id="@+id/item_main_tab_iv"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/account"
+        android:scaleType="centerInside" />
+
+    <TextView
+        android:id="@+id/item_main_tab_tv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:text="私人订单"
+        android:textSize="16sp" />
+</LinearLayout>

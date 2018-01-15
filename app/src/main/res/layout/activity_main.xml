@@ -14,13 +14,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <android.support.design.widget.NavigationView
-        android:id="@+id/nav_view"
+    <!--<android.support.design.widget.NavigationView-->
+        <!--android:id="@+id/nav_view"-->
+        <!--android:layout_width="198dp"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_gravity="start"-->
+        <!--android:fitsSystemWindows="true"-->
+        <!--android:visibility="gone"-->
+        <!--app:headerLayout="@layout/nav_header_main"-->
+        <!--app:menu="@menu/activity_main_drawer" />-->
+
+    <include
+        layout="@layout/drawer_left"
         android:layout_width="198dp"
-        android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/activity_main_drawer" />
+        android:layout_height="match_parent" />
 
 </android.support.v4.widget.DrawerLayout>

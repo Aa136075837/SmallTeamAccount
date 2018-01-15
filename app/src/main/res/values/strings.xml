@@ -12,10 +12,10 @@
     <string name="add_account">添加账单</string>
     <string name="user_balance">个人收支</string>
 
-    <string name="login_out">退出</string>
+    <string name="login_out">退\t\t出</string>
     <string name="personal_account">私人账单</string>
     <string name="group_account">集体账单</string>
-    <string name="setting">设置</string>
+    <string name="setting">设\t\t置</string>
     <string name="ee">私人账单</string>
 
 

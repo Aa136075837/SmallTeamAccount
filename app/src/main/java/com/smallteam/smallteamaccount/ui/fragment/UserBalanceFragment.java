@@ -44,14 +44,12 @@ public class UserBalanceFragment extends MVPBaseFragment<UserBalanceContract.Use
     protected void initViews() {
         mBalancePie.setUsePercentValues(true);
         mBalancePie.getDescription().setEnabled(false);
-        mBalancePie.setExtraOffsets(5, 5, 5, 1);
 
         mBalancePie.setDragDecelerationFrictionCoef(0.95f);
 
-//        mBalancePie.setCenterTextTypeface(mTfLight);
         mBalancePie.setCenterText("个人收支");
 
-        mBalancePie.setExtraOffsets(10.f, 0.f, 18.f, 0.f);
+        mBalancePie.setExtraOffsets(10.f, 0.f, 38.f, 0.f);
 
         mBalancePie.setDrawHoleEnabled(true);
         mBalancePie.setHoleColor(Color.WHITE);
