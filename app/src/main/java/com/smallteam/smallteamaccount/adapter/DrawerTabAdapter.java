@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.smallteam.smallteamaccount.R;
+import com.smallteam.smallteamaccount.bean.GroupBean;
 
 import java.util.List;
 
@@ -19,11 +20,14 @@ import java.util.List;
 public class DrawerTabAdapter extends RecyclerView.Adapter<DrawerTabAdapter.DrawerHolder> {
 
     private Context mContext;
-    private List<String> mData;
+    private List<GroupBean> mData;
 
-    public DrawerTabAdapter(Context context, List<String> data) {
+    public DrawerTabAdapter(Context context) {
         mContext = context;
-        mData = data;
+    }
+
+    public void setData(List<GroupBean> mData) {
+        this.mData = mData;
     }
 
     @Override
@@ -34,7 +38,7 @@ public class DrawerTabAdapter extends RecyclerView.Adapter<DrawerTabAdapter.Draw
 
     @Override
     public void onBindViewHolder(DrawerHolder holder, int position) {
-        holder.mTabTv.setText(mData.get(position));
+        holder.mGroupNameTv.setText(mData.get(position).getName());
         holder.itemView.setOnClickListener(v -> {
             if (mListener != null) {
                 mListener.onDrawerItemClick(position);
@@ -44,7 +48,7 @@ public class DrawerTabAdapter extends RecyclerView.Adapter<DrawerTabAdapter.Draw
 
     @Override
     public int getItemCount() {
-        return 6;
+        return mData==null?0:mData.size();
     }
 
     private DrawerItemClickListener mListener;
@@ -59,13 +63,13 @@ public class DrawerTabAdapter extends RecyclerView.Adapter<DrawerTabAdapter.Draw
 
     static class DrawerHolder extends RecyclerView.ViewHolder {
 
-        private final ImageView mTabIv;
-        private final TextView mTabTv;
+        private final ImageView mGroupIconIv;
+        private final TextView mGroupNameTv;
 
         public DrawerHolder(View itemView) {
             super(itemView);
-            mTabIv = (ImageView) itemView.findViewById(R.id.item_main_tab_iv);
-            mTabTv = (TextView) itemView.findViewById(R.id.item_main_tab_tv);
+            mGroupIconIv = (ImageView) itemView.findViewById(R.id.item_main_tab_iv);
+            mGroupNameTv = (TextView) itemView.findViewById(R.id.item_main_tab_tv);
         }
     }
 }

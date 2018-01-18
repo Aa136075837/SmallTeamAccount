@@ -3,18 +3,19 @@ package com.smallteam.smallteamaccount.bean;
 import java.io.Serializable;
 
 /**
- * Created by TENGFEI on 2018/1/14.
+ * 账本bean
+ * Created by TENGFEI on 2018/1/18.
  */
-public class GroupBean implements Serializable {
+public class NewAccountBean implements Serializable {
 
 
     /**
-     * id : 353c7fc8-7a40-4d15-abc6-56d97246232e
-     * name : 默认账本
+     * id : d4fbcde9-94b2-4eba-ae21-98b103b68173
+     * name : 驴儿乖
      * creater : 589dafbf-2470-4a7a-815d-86aadf722e30
-     * createTime : 1515998169000
-     * description : null
-     * type : DEFAULT
+     * createTime : 1516159098173
+     * description : 第一个账本
+     * type : NORMAL
      * icon : null
      */
 
@@ -58,7 +59,7 @@ public class GroupBean implements Serializable {
         this.createTime = createTime;
     }
 
-    public Object getDescription() {
+    public String getDescription() {
         return description;
     }
 
@@ -74,7 +75,7 @@ public class GroupBean implements Serializable {
         this.type = type;
     }
 
-    public Object getIcon() {
+    public String getIcon() {
         return icon;
     }
 

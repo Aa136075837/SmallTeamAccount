@@ -13,9 +13,18 @@
         android:id="@+id/main_tab_rv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/system_ll"
         android:layout_below="@+id/drawer_header" />
 
+
+    <TextView
+        android:id="@+id/tv_add_account"
+        android:layout_below="@id/main_tab_rv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="20dp"
+        android:text="添加账本"
+        />
     <LinearLayout
         android:id="@+id/system_ll"
         android:layout_width="match_parent"
@@ -30,10 +39,7 @@
             android:layout_marginLeft="8dp"
             android:gravity="center_vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="System" />
+
 
             <View
                 android:layout_width="match_parent"

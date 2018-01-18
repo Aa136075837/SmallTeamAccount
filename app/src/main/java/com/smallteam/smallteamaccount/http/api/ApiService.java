@@ -1,6 +1,7 @@
 package com.smallteam.smallteamaccount.http.api;
 
 import com.smallteam.smallteamaccount.bean.GroupBean;
+import com.smallteam.smallteamaccount.bean.NewAccountBean;
 import com.smallteam.smallteamaccount.bean.NormalBean;
 import com.smallteam.smallteamaccount.bean.ServerResultBean;
 import com.smallteam.smallteamaccount.bean.UserBean;
@@ -28,6 +29,9 @@ public interface ApiService {
 
     @POST("userGroup/getGroupByUserId")
     Observable<ServerResultBean<List<GroupBean>>> getGroups(@Body RequestBody body);
+
+    @POST("userGroup/addOne")
+    Observable<ServerResultBean<NewAccountBean>> addOneAccount(@Body RequestBody body);
 
 
 }

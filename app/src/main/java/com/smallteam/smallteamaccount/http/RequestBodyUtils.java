@@ -14,18 +14,13 @@ public class RequestBodyUtils {
 
     private static MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
-    private static LinkedHashMap<String, Object> getDefaultParams() {
-        LinkedHashMap<String, Object> map = new LinkedHashMap<>();
-
-        return map;
-    }
-
     public static RequestBody getParams(LinkedHashMap<String, Object> map) {
-        LinkedHashMap<String, Object> defaultParams = getDefaultParams();
+        JSONObject jsonObject = null;
         if (map != null) {
-            defaultParams.putAll(map);
+            jsonObject = new JSONObject(map);
+        }else {
+            jsonObject = new JSONObject();
         }
-        JSONObject jsonObject = new JSONObject(defaultParams);
         return RequestBody.create(JSON, jsonObject.toString());
     }
 

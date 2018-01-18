@@ -11,6 +11,9 @@ import com.smallteam.smallteamaccount.http.Load;
 import com.smallteam.smallteamaccount.http.RequestBodyUtils;
 import com.smallteam.smallteamaccount.utils.SpConfig;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -21,6 +24,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.BiFunction;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.FormBody;
+import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
 /**
@@ -30,6 +34,8 @@ import okhttp3.RequestBody;
 public interface MainContract {
     interface MainView extends BaseView {
         void textSuccess();
+
+        void setGroupList(List<GroupBean> groupBeans);
     }
 
     class MainPresenter extends BasePresenter<MainView> {
@@ -41,15 +47,22 @@ public interface MainContract {
         public void getGroups() {
 
             String id = SpConfig.getInstance().getUser().getId();
-            RequestBody body = RequestBodyUtils.getParams((LinkedHashMap<String, Object>) new LinkedHashMap<>().put("id", id));
+            LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+            map.put("id", id);
+            RequestBody body = RequestBodyUtils.getParams(map);
 
             HttpObserver<List<GroupBean>> httpObserver = Load.call(Load.createApi().getGroups(body)).subscribeWith(new HttpObserver<List<GroupBean>>(mView, true) {
                 @Override
                 protected void call(List<GroupBean> value) {
-
+                    mView.setGroupList(value);
                 }
             });
             addObservable(httpObserver);
+        }
+
+        public void addOneAccount() {
+
+
         }
     }
 

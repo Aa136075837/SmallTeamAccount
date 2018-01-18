@@ -25,6 +25,7 @@ import com.smallteam.smallteamaccount.R;
 import com.smallteam.smallteamaccount.adapter.DrawerTabAdapter;
 import com.smallteam.smallteamaccount.base.BaseFragment;
 import com.smallteam.smallteamaccount.base.MVPBaseActivity;
+import com.smallteam.smallteamaccount.bean.GroupBean;
 import com.smallteam.smallteamaccount.presenter.MainContract;
 import com.smallteam.smallteamaccount.ui.fragment.AccountListFragment;
 import com.smallteam.smallteamaccount.ui.fragment.AddAccountFragment;
@@ -49,6 +50,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.MainPresenter>
     private BottomNavigationView mBnv;
     private RecyclerView mRv;
     private DrawerLayout mDrawer;
+    private DrawerTabAdapter tabAdapter;
 
     @Override
     protected int initLayout() {
@@ -73,6 +75,15 @@ public class MainActivity extends MVPBaseActivity<MainContract.MainPresenter>
             this, mDrawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        findViewById(R.id.tv_add_account).setOnClickListener(v -> {
+            /*添加账本*/
+            mPresenter.addOneAccount();
+        });
+
+        /*请求所有账本*/
+        mPresenter.getGroups();
+
         /**默认进入账单列表页面*/
         toAccountListFragment();
     }
@@ -97,16 +108,9 @@ public class MainActivity extends MVPBaseActivity<MainContract.MainPresenter>
 
         LinearLayoutManager manager = new LinearLayoutManager(this);
         mRv.setLayoutManager(manager);
-        List<String> list = new ArrayList<>();
-        list.add("私人账单");
-        list.add("团队账单1");
-        list.add("团队账单2");
-        list.add("团队账单3");
-        list.add("团队账单4");
-        list.add("团队账单5");
-        DrawerTabAdapter adapter = new DrawerTabAdapter(this, list);
-        adapter.setDrawerItemClickListener(this);
-        mRv.setAdapter(adapter);
+        tabAdapter = new DrawerTabAdapter(this);
+        tabAdapter.setDrawerItemClickListener(this);
+        mRv.setAdapter(tabAdapter);
     }
 
     @Override
@@ -186,6 +190,13 @@ public class MainActivity extends MVPBaseActivity<MainContract.MainPresenter>
         Snackbar.make(mBnv, " 测试请求成功...", Snackbar.LENGTH_LONG).setAction("duai", view -> {
 
         }).show();
+    }
+
+    //处理返回的所有账本
+    @Override
+    public void setGroupList(List<GroupBean> groupBeans) {
+        tabAdapter.setData(groupBeans);
+        tabAdapter.notifyDataSetChanged();
     }
 
     private long firstTime = 0;
