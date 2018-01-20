@@ -48,8 +48,8 @@ public class AccountListFragment extends MVPBaseFragment<AccountListContract.Acc
         mAccountRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mAccountRefresh.setRefreshing(true);
-                mPresenter.getAccountList();
+                mAccountRefresh.setRefreshing(false);
+//                mPresenter.getAccountList();
             }
         });
         LinearLayoutManager manager = new LinearLayoutManager(SmallTeamApp.getInstance());
