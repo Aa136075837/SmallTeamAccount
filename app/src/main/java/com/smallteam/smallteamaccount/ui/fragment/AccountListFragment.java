@@ -4,11 +4,9 @@ import android.graphics.Rect;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -33,7 +31,8 @@ import butterknife.BindView;
  * Created by Administrator on 2018/1/4.
  */
 
-public class AccountListFragment extends MVPBaseFragment<AccountListContract.AccountListPresenter> implements AccountListContract.AccountListView {
+public class AccountListFragment extends MVPBaseFragment<AccountListContract.AccountListPresenter> implements
+        AccountListContract.AccountListView {
     @BindView(R.id.account_recycle)
     SwipeMenuRecyclerView mAccountRecycle;
     @BindView(R.id.account_refresh)
@@ -120,9 +119,9 @@ public class AccountListFragment extends MVPBaseFragment<AccountListContract.Acc
             int height = ViewGroup.LayoutParams.MATCH_PARENT;
             SwipeMenuItem deleteItem = new SwipeMenuItem(SmallTeamApp.getInstance());
             deleteItem.setBackground(R.drawable.selector_red)
-                .setImage(R.drawable.icon_delete)
-                .setWidth(width)
-                .setHeight(height);
+                    .setImage(R.drawable.icon_delete)
+                    .setWidth(width)
+                    .setHeight(height);
             swipeRightMenu.addMenuItem(deleteItem);
         }
     };

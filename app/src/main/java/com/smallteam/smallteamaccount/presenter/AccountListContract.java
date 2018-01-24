@@ -33,21 +33,21 @@ public interface AccountListContract {
 
         public void getAccountList() {
             RequestBody body = new FormBody.Builder()
-                .add("password", "asdd45645")
-                .add("phone", "14785203693")
-                .build();
+                    .add("password", "asdd45645")
+                    .add("phone", "14785203693")
+                    .build();
             HttpObserver<NormalBean> httpObserver = Observable.zip(Load.createApi().test(body), Observable.timer(3, TimeUnit.SECONDS), new BiFunction<NormalBean, Long, NormalBean>() {
                 @Override
                 public NormalBean apply(NormalBean normalBean, Long aLong) throws Exception {
                     return normalBean;
                 }
             }).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).subscribeWith(new HttpObserver<NormalBean>( mView, true) {
-                    @Override
-                    protected void call(NormalBean value) {
-                        mView.getListSuccess(value);
-                    }
-                });
+                    .observeOn(AndroidSchedulers.mainThread()).subscribeWith(new HttpObserver<NormalBean>(mView, true) {
+                        @Override
+                        protected void call(NormalBean value) {
+                            mView.getListSuccess(value);
+                        }
+                    });
             addObservable(httpObserver);
         }
     }

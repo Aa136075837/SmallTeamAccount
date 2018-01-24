@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -25,8 +24,6 @@ public class PartsPopupWindow extends PopupWindow {
 
     public PartsPopupWindow(Context context, List<String> list) {
         super(context);
-        WindowManager manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        int height = manager.getDefaultDisplay().getHeight();
 
         View view = LayoutInflater.from(context).inflate(R.layout.parts_popup, null);
         ListView listView = view.findViewById(R.id.parts_popup_lv);
@@ -68,6 +65,10 @@ public class PartsPopupWindow extends PopupWindow {
     }
 
     public interface PartsCheckNameChangedListener {
+        /**
+         *
+         * @param checkedName
+         */
         void onCheckNameChanged(List<String> checkedName);
     }
 }

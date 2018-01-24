@@ -1,7 +1,9 @@
 package com.smallteam.smallteamaccount.base;
 
 /**
- * Created by Administrator on 2018/1/3.
+ *
+ * @author Administrator
+ * @date 2018/1/3
  */
 
 public interface AbBasePresenter {

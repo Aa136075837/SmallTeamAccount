@@ -1,12 +1,36 @@
 package com.smallteam.smallteamaccount.utils;
 
 import android.content.Context;
-import android.widget.Toast;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringUtil {
+    /**
+     * 验证码长度
+     */
+    private static final int VERIFY_CODE_LENGTH = 6;
+    /**
+     * 密码最低长度
+     */
+    private static final int PASSWORD_MIN_LENGTH = 6;
+    /**
+     * 密码 正则
+     */
+    private static final String PASSWORD_REGEX = "^(?=.*\\d)(?=.*[A-z]).{6,18}$";
+    /**
+     * 手机号正则
+     */
+    private static final String PHONE_REGEX = "[1][3,4,5,7,8][0-9]{9}";
+
+    /**
+     * 验证码正则
+     */
+    private static final String VERIFY_CODE_REGEX = "[0-9]{6}";
+    /**
+     * 数字正则模型
+     */
+    private static Pattern pattern = Pattern.compile("[0-9]*");
 
     /**
      * 判断是否为null或空字符串
@@ -46,8 +70,9 @@ public class StringUtil {
      * @lastModify 2016/08/30
      */
     public static boolean isNotEmpty(String str) {
-        if (str == null || str.trim().equals(""))
+        if (str == null ||"".equals(str.trim())) {
             return false;
+        }
         return true;
     }
 
@@ -84,12 +109,13 @@ public class StringUtil {
      */
     public static boolean strIsNum(String str) {
         // 判断是否为空
-        if (StringUtil.isEmpty(str))
+        if (StringUtil.isEmpty(str)) {
             return false;
+        }
         // 去空格
         str = str.trim();
         // 匹配
-        Pattern pattern = Pattern.compile("[0-9]*");
+
         Matcher isNum = pattern.matcher(str);
         if (!isNum.matches()) {
             return false;
@@ -108,11 +134,11 @@ public class StringUtil {
         }
         // 去空格
         str = str.trim();
-        if (str.length() < 6) {
+        if (str.length() < PASSWORD_MIN_LENGTH) {
             EasyToast.showShort(context, "密码不符合规则");
             return false;
         }
-        if (str.matches("^(?=.*\\d)(?=.*[A-z]).{6,18}$")) {
+        if (str.matches(PASSWORD_REGEX)) {
             return true;
         }
         EasyToast.showShort(context, "密码不符合规则");
@@ -131,7 +157,7 @@ public class StringUtil {
         // 去空格
         str = str.trim();
         // 匹配
-        if (str.matches("[1][3,4,5,7,8][0-9]{9}")) {
+        if (str.matches(PHONE_REGEX)) {
             return true;
         }
         EasyToast.showShort(context, "请输入正确的手机号");
@@ -150,7 +176,7 @@ public class StringUtil {
         // 去空格
         str = str.trim();
         // 匹配
-        if (str.matches("[0-9]{6}")) {
+        if (str.matches(VERIFY_CODE_REGEX)) {
             return true;
         }
         EasyToast.showShort(context, "请输入6位验证码");

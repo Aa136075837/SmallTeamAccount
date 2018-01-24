@@ -6,6 +6,9 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.util.DisplayMetrics;
 
+/**
+ * @author Macx
+ */
 public class DisplayUtil {
     private static final String TAG = "DisplayUtil";
 

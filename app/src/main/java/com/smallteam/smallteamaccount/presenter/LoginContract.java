@@ -1,11 +1,9 @@
 package com.smallteam.smallteamaccount.presenter;
 
 import android.content.Context;
-import android.widget.Toast;
 
 import com.smallteam.smallteamaccount.base.BasePresenter;
 import com.smallteam.smallteamaccount.base.BaseView;
-import com.smallteam.smallteamaccount.bean.NormalBean;
 import com.smallteam.smallteamaccount.bean.UserBean;
 import com.smallteam.smallteamaccount.http.HttpObserver;
 import com.smallteam.smallteamaccount.http.Load;
@@ -13,14 +11,10 @@ import com.smallteam.smallteamaccount.http.RequestBodyUtils;
 import com.smallteam.smallteamaccount.utils.EasyToast;
 import com.smallteam.smallteamaccount.utils.SpConfig;
 
-import cn.smssdk.EventHandler;
-import cn.smssdk.SMSSDK;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-
 import java.util.LinkedHashMap;
 
-import okhttp3.RequestBody;
+import cn.smssdk.EventHandler;
+import cn.smssdk.SMSSDK;
 
 /**
  * Created by shuangyue on 2018/1/6.
@@ -61,6 +55,7 @@ public interface LoginContract {
             // 请求验证码，其中country表示国家代码，如“86”；phone表示手机号码，如“13800138000”
             // 注册一个事件回调，用于处理发送验证码操作的结果
             SMSSDK.registerEventHandler(new EventHandler() {
+                @Override
                 public void afterEvent(int event, int result, Object data) {
                     if (result == SMSSDK.RESULT_COMPLETE) {
                         // TODO 处理成功得到验证码的结果

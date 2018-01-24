@@ -1,10 +1,6 @@
 package com.smallteam.smallteamaccount.ui.fragment;
 
 import android.graphics.Color;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.animation.Easing;
@@ -27,11 +23,11 @@ import com.smallteam.smallteamaccount.utils.L;
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
- * Created by Administrator on 2018/1/4.
+ *
+ * @author Administrator
+ * @date 2018/1/4
  */
 
 public class UserBalanceFragment extends MVPBaseFragment<UserBalanceContract.UserBalancePresenter> implements UserBalanceContract.UserBalanceView, OnChartValueSelectedListener {
@@ -69,10 +65,6 @@ public class UserBalanceFragment extends MVPBaseFragment<UserBalanceContract.Use
 
         mBalancePie.setDrawEntryLabels(false);
 
-        // mChart.setUnit(" €");
-        // mChart.setDrawUnitsInChart(true);
-
-        // add a selection listener
         mBalancePie.setOnChartValueSelectedListener(this);
 
         setData(5, 100);
@@ -127,7 +119,7 @@ public class UserBalanceFragment extends MVPBaseFragment<UserBalanceContract.Use
         for (int i = 0; i < count; i++) {
             entries.add(new PieEntry((float) ((Math.random() * mult) + mult / 5),
                 mParties[i % mParties.length] +": "+ moneys[i % moneys.length],
-                getResources().getDrawable(R.drawable.account_fill_red),"1231"));
+                getContext().getResources().getDrawable(R.drawable.account_fill_red),"1231"));
         }
 
         PieDataSet dataSet = new PieDataSet(entries, "");
@@ -138,22 +130,22 @@ public class UserBalanceFragment extends MVPBaseFragment<UserBalanceContract.Use
 
         ArrayList<Integer> colors = new ArrayList<Integer>();
 
-        for (int c : ColorTemplate.VORDIPLOM_COLORS)
+        for (int c : ColorTemplate.VORDIPLOM_COLORS) {
             colors.add(c);
+        }
 
-        for (int c : ColorTemplate.JOYFUL_COLORS)
+        for (int c : ColorTemplate.JOYFUL_COLORS) {
             colors.add(c);
+        }
 
         colors.add(ColorTemplate.getHoloBlue());
 
         dataSet.setColors(colors);
-        //dataSet.setSelectionShift(0f);
 
         PieData data = new PieData(dataSet);
         data.setValueFormatter(new PercentFormatter());
         data.setValueTextSize(11f);
         data.setValueTextColor(Color.WHITE);
-//        data.setValueTypeface(mTfLight);
         mBalancePie.setData(data);
 
         // undo all highlights

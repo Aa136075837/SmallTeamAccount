@@ -130,6 +130,8 @@ public class AddAccountFragment extends MVPBaseFragment<AddAccountContract.AddAc
             case R.id.add_grid_other:
                 content = mAddGridOther.getText().toString().trim();
                 break;
+            default:
+                break;
         }
         mAddTypesEt.setText(content);
         mAddGridLayout.setVisibility(View.GONE);

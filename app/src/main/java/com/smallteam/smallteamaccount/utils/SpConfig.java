@@ -6,17 +6,17 @@ import com.google.gson.Gson;
 import com.smallteam.smallteamaccount.base.SmallTeamApp;
 import com.smallteam.smallteamaccount.bean.UserBean;
 
-import org.json.JSONObject;
-
 /**
  * 所有的关于sp的操作都通过该类实现
- * Created by TENGFEI on 2018/1/10.
+ *
+ * @author TENGFEI
+ * @date 2018/1/10
  */
 public class SpConfig {
-    private static final SpConfig ourInstance = new SpConfig();
+    private static final SpConfig OUR_INSTANCE = new SpConfig();
 
     public static SpConfig getInstance() {
-        return ourInstance;
+        return OUR_INSTANCE;
     }
 
     private SpConfig() {

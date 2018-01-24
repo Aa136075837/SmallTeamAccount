@@ -1,16 +1,15 @@
 package com.smallteam.smallteamaccount.http;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 
 import com.smallteam.smallteamaccount.base.BaseView;
-import com.smallteam.smallteamaccount.constant.SysConstant;
-import com.smallteam.smallteamaccount.utils.EasyToast;
 
 import io.reactivex.observers.DisposableObserver;
 
 /**
- * Created by Administrator on 2018/1/3.
+ *
+ * @author Administrator
+ * @date 2018/1/3
  */
 
 public abstract class HttpObserver<T> extends DisposableObserver<T> {

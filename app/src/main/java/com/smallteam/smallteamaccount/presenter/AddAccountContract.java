@@ -29,6 +29,7 @@ public interface AddAccountContract {
         public void sendCode(String country, String phone) {
             // 注册一个事件回调，用于处理发送验证码操作的结果
             SMSSDK.registerEventHandler(new EventHandler() {
+                @Override
                 public void afterEvent(int event, int result, Object data) {
                     if (result == SMSSDK.RESULT_COMPLETE) {
                         // TODO 处理成功得到验证码的结果
@@ -51,6 +52,7 @@ public interface AddAccountContract {
         public void submitCode(String country, String phone, String code) {
             // 注册一个事件回调，用于处理提交验证码操作的结果
             SMSSDK.registerEventHandler(new EventHandler() {
+                @Override
                 public void afterEvent(int event, int result, Object data) {
                     if (result == SMSSDK.RESULT_COMPLETE) {
                         // TODO 处理验证成功的结果

@@ -27,6 +27,8 @@ public class FragmentFactory {
                 case 2:
                     fragment = new UserBalanceFragment();
                     break;
+                default:
+                    break;
             }
             if (fragment != null) {
                 fragments.put(index, fragment);
