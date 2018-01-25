@@ -17,10 +17,10 @@
         tools:replace="android:name">
         <activity
             android:name=".ui.activity.LoginActivity"
-            android:label="@string/app_name">
-        </activity>
+            android:label="@string/app_name"></activity>
         <activity android:name=".ui.activity.MainActivity" />
-        <activity android:name=".ui.activity.SplashActivity"
+        <activity
+            android:name=".ui.activity.SplashActivity"
             android:theme="@style/Theme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,8 +28,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".ui.activity.CreateBookAccountActivity" />
+        <activity android:name=".ui.activity.AddGroupActivity"></activity>
     </application>
 
 </manifest>

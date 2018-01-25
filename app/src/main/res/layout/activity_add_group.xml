@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context="com.smallteam.smallteamaccount.ui.activity.AddGroupActivity">
+
+    <EditText
+        android:id="@+id/et_group_name"
+        android:layout_width="match_parent"
+        android:hint="@string/group_name_input"
+        android:layout_height="48dp" />
+
+    <EditText
+        android:id="@+id/et_group_desc"
+        android:hint="@string/group_desc_input"
+        android:layout_width="match_parent"
+        android:layout_height="48dp" />
+
+    <TextView
+        android:id="@+id/tv_group_create"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="创建"
+        android:gravity="center"
+        android:textColor="@color/black" />
+
+</LinearLayout>

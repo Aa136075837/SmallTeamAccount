@@ -15,12 +15,14 @@ import com.smallteam.smallteamaccount.R;
 import com.smallteam.smallteamaccount.adapter.DrawerTabAdapter;
 import com.smallteam.smallteamaccount.base.MVPBaseActivity;
 import com.smallteam.smallteamaccount.bean.GroupBean;
+import com.smallteam.smallteamaccount.bean.NewAccountBean;
 import com.smallteam.smallteamaccount.presenter.MainContract;
 import com.smallteam.smallteamaccount.ui.fragment.AccountListFragment;
 import com.smallteam.smallteamaccount.ui.fragment.AddAccountFragment;
 import com.smallteam.smallteamaccount.ui.fragment.UserBalanceFragment;
 import com.smallteam.smallteamaccount.utils.EasyToast;
 import com.smallteam.smallteamaccount.utils.FragmentFactory;
+import com.smallteam.smallteamaccount.utils.L;
 
 import java.util.List;
 
@@ -67,11 +69,10 @@ public class MainActivity extends MVPBaseActivity<MainContract.MainPresenter>
 
         findViewById(R.id.tv_add_account).setOnClickListener(v -> {
             /*添加账本*/
-            mPresenter.addOneAccount();
+            startAcvitity(AddGroupActivity.class);
         });
 
-        /*请求所有账本*/
-        mPresenter.getGroups();
+
 
         /**默认进入账单列表页面*/
         toAccountListFragment();
@@ -116,6 +117,13 @@ public class MainActivity extends MVPBaseActivity<MainContract.MainPresenter>
             comming();
             mDrawer.closeDrawers();
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        /*请求所有账本*/
+        mPresenter.getGroups();
     }
 
     @Override
@@ -190,6 +198,11 @@ public class MainActivity extends MVPBaseActivity<MainContract.MainPresenter>
     public void setGroupList(List<GroupBean> groupBeans) {
         tabAdapter.setData(groupBeans);
         tabAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void addAccountSuccess(NewAccountBean value) {
+        L.e("addAccountSuccess :: " + value.getName());
     }
 
     private long firstTime = 0;
